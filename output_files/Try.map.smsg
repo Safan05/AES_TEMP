@@ -1,0 +1,4 @@
+Info (10281): Verilog HDL Declaration information at SevenSegment.v(4): object "o" differs only in case from object "O" in the same scope File: D:/Computer department/sem 2/Sim/SevenSegment.v Line: 4
+Info (10281): Verilog HDL Declaration information at SevenSegment.v(5): object "t" differs only in case from object "T" in the same scope File: D:/Computer department/sem 2/Sim/SevenSegment.v Line: 5
+Info (10281): Verilog HDL Declaration information at SevenSegment.v(6): object "h" differs only in case from object "H" in the same scope File: D:/Computer department/sem 2/Sim/SevenSegment.v Line: 6
+Warning (10268): Verilog HDL information at Decrypt.v(22): always construct contains both blocking and non-blocking assignments File: D:/Computer department/sem 2/Sim/Decrypt.v Line: 22
