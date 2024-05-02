@@ -1,19 +1,22 @@
 module SubBytes(input [0:127]inp, output reg [0:127] outp);
 
-reg [0:7]ss00,ss01,ss02,ss03;
-reg [0:7]ss10,ss11,ss12,ss13;
-reg [0:7]ss20,ss21,ss22,ss23;
-reg [0:7]ss30,ss31,ss32,ss33;
+reg [0:7]st00,st01,st02,st03;
+reg [0:7]st10,st11,st12,st13;
+reg [0:7]st20,st21,st22,st23;
+reg [0:7]st30,st31,st32,st33;
 
-assign st00=inp[0:7];     assign st01=inp[8:15] ;     assign st02=inp[16:23];    assign st03=inp[24:31];
-assign st10=inp[32:39];   assign st11=inp[40:47] ;    assign st12=inp[48:55];    assign st13=inp[56:63]; 
-assign st20=inp[64:71];   assign st21=inp[72:79] ;    assign st22=inp[80:87];    assign st23=inp[88:95];
-assign st30=inp[96:103];  assign st31=inp[104:111];   assign st32=inp[112:119];  assign st33=inp[120:127]; 
-always @*
+always @(*)
+begin
+st00=inp[0:7];    st01=inp[8:15] ;     st02=inp[16:23];    st03=inp[24:31];
+st10=inp[32:39];  st11=inp[40:47] ;    st12=inp[48:55];    st13=inp[56:63]; 
+st20=inp[64:71];  st21=inp[72:79] ;    st22=inp[80:87];    st23=inp[88:95];
+st30=inp[96:103]; st31=inp[104:111];   st32=inp[112:119];  st33=inp[120:127]; 
+
 outp=SubBytes(st00,st01,st02,st03,
 st10,st11,st12,st13,
 st20,st21,st22,st23,
 st30,st31,st32,st33);
+end
 function [0:127] SubBytes(input [0:7]
 s00,s01,s02,s03,
 s10,s11,s12,s13,

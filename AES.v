@@ -26,10 +26,11 @@ endmodule
 
 module Test();
 wire [6:0] j1,j2,j3;
-wire c;
+reg c;
 reg [1:0] switch;
 reg clk;
 reg [127:0]in=128'h8ea2b7ca516745bfeafc49904b496089;
+reg[127:0] ch=128'h00112233445566778899aabbccddeeff;
 reg [255:0]key_256=256'h000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f;
 wire [1919:0]expanded_key;
 wire [127:0]encrypted;
@@ -41,8 +42,11 @@ switch=2'b10;
 end
 always @(*)
 begin
-e_key=expanded_key;
+if(encrypted==ch)
+	c=1'b1;
+else
+	c=1'b0;
 end
 always #50 clk=~clk;
-decrypt a(in,encrypted,e_key,switch,clk,j1,j2,j3);
+decrypt a(in,encrypted,expanded_key,switch,clk,j1,j2,j3);
 endmodule

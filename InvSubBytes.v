@@ -4,7 +4,7 @@ reg [0:7]st00,st01,st02,st03;
 reg [0:7]st10,st11,st12,st13;
 reg [0:7]st20,st21,st22,st23;
 reg [0:7]st30,st31,st32,st33;
-always @*
+always @(*)
 begin
 st00=inp[0:7];    st01=inp[8:15] ;     st02=inp[16:23];    st03=inp[24:31];
 st10=inp[32:39];  st11=inp[40:47] ;    st12=inp[48:55];    st13=inp[56:63]; 
@@ -30,9 +30,9 @@ reg [0:7]ss30,ss31,ss32,ss33;
 
 begin 
  ss00 =sbout(s00); ss01 =sbout(s01); ss02=sbout(s02); ss03=sbout(s03);
- ss10 =sbout(s00); ss11 =sbout(s01); ss12=sbout(s02); ss13=sbout(s03);
- ss20 =sbout(s00); ss21 =sbout(s01); ss22=sbout(s02); ss23=sbout(s03);
- ss30 =sbout(s00); ss31 =sbout(s01); ss32=sbout(s02); ss33=sbout(s03);
+ ss10 =sbout(s10); ss11 =sbout(s11); ss12=sbout(s12); ss13=sbout(s13);
+ ss20 =sbout(s20); ss21 =sbout(s21); ss22=sbout(s22); ss23=sbout(s23);
+ ss30 =sbout(s30); ss31 =sbout(s31); ss32=sbout(s32); ss33=sbout(s33);
 
  InvSubBytes[0:7]=ss00;      InvSubBytes[8:15]=ss01;    InvSubBytes[16:23]=ss02;    InvSubBytes[24:31]=ss03;
  InvSubBytes[32:39]=ss10;    InvSubBytes[40:47]=ss11;   InvSubBytes[48:55]=ss12;    InvSubBytes[56:63]=ss13;

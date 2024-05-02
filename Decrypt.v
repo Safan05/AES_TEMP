@@ -9,7 +9,7 @@ reg [127:0] temp_in,temp_key,temp_in_l,tempo;
 wire [127:0] temp_out,temp_out_last;
 reg [7:0] lastbit;
 output wire [6:0]h1,h2,h3;
-integer count=0;
+integer count=1;
 integer nr;
 always @(*) begin
     if (switch == 2'b00)
@@ -23,18 +23,18 @@ always @(posedge clk)
 begin
 if(count==nr)
 begin
-temp_in=in^key_d[1919:1792];
-temp_key=key_d[1791:1664];
+temp_in<=in^key_d[127:0];
+temp_key<=key_d[255:128];
 count=count+1;
 end
-else if(count>nr && count <(2*nr)-1)
+else if(count>nr && count <(2*nr))
 begin
 temp_in<=temp_out;
-temp_key<=key_d[(1919-128*(count-nr+1))-:128];
+temp_key<=key_d[(((count-nr+2)*128)-1)-:128];
 tempo<=temp_out;
 count=count+1;
 end
-else if(count==((2*nr)-1))
+else if(count==((2*nr)))
 begin
 tempo<=temp_out_last;
 count=count+1;

@@ -1,5 +1,4 @@
-module ShiftRows_inv (input[0:127] in , output reg[0:127] out);
- 
+module ShiftRows_inv(input[0:127] in , output reg[0:127] out); 
 always@(*)
  begin
  //row1

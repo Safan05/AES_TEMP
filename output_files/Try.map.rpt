@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Try
-Thu May  2 04:02:21 2024
+Thu May  2 17:33:58 2024
 Quartus Prime Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
 
 
@@ -13,20 +13,16 @@ Quartus Prime Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
   5. Analysis & Synthesis Source Files Read
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
-  8. Registers Removed During Synthesis
-  9. Removed Registers Triggering Further Register Optimizations
- 10. General Register Statistics
+  8. General Register Statistics
+  9. Inverted Register Statistics
+ 10. Multiplexer Restructuring Statistics (Restructuring Performed)
  11. Parameter Settings for User Entity Instance: KeyExpansion:c
- 12. Port Connectivity Checks: "decrypt:a|LastRound:rl|ShiftRows_inv:op3"
- 13. Port Connectivity Checks: "decrypt:a|LastRound:rl|InvSubBytes:op2"
- 14. Port Connectivity Checks: "decrypt:a|Round:r|ShiftRows_inv:op3"
- 15. Port Connectivity Checks: "decrypt:a|Round:r|InvSubBytes:op2"
- 16. Port Connectivity Checks: "decrypt:a"
- 17. Port Connectivity Checks: "KeyExpansion:c"
- 18. Post-Synthesis Netlist Statistics for Top Partition
- 19. Elapsed Time Per Partition
- 20. Analysis & Synthesis Messages
- 21. Analysis & Synthesis Suppressed Messages
+ 12. Port Connectivity Checks: "decrypt:a"
+ 13. Port Connectivity Checks: "KeyExpansion:c"
+ 14. Post-Synthesis Netlist Statistics for Top Partition
+ 15. Elapsed Time Per Partition
+ 16. Analysis & Synthesis Messages
+ 17. Analysis & Synthesis Suppressed Messages
 
 
 
@@ -53,13 +49,13 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +---------------------------------+------------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Thu May  2 04:02:21 2024          ;
+; Analysis & Synthesis Status     ; Successful - Thu May  2 17:33:58 2024          ;
 ; Quartus Prime Version           ; 23.1std.0 Build 991 11/28/2023 SC Lite Edition ;
 ; Revision Name                   ; Try                                            ;
 ; Top-level Entity Name           ; aes                                            ;
 ; Family                          ; Cyclone V                                      ;
 ; Logic utilization (in ALMs)     ; N/A                                            ;
-; Total registers                 ; 0                                              ;
+; Total registers                 ; 296                                            ;
 ; Total pins                      ; 25                                             ;
 ; Total virtual pins              ; 0                                              ;
 ; Total block memory bits         ; 0                                              ;
@@ -169,10 +165,11 @@ https://fpgasoftware.intel.com/eula.
 ; Maximum allowed            ; 2           ;
 ;                            ;             ;
 ; Average used               ; 1.00        ;
-; Maximum used               ; 1           ;
+; Maximum used               ; 2           ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
+;     Processor 2            ;   0.0%      ;
 +----------------------------+-------------+
 
 
@@ -192,65 +189,50 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------+-----------------+------------------------+--------------------------------------------------+---------+
 
 
-+--------------------------------------------------------------+
-; Analysis & Synthesis Resource Usage Summary                  ;
-+---------------------------------------------+----------------+
-; Resource                                    ; Usage          ;
-+---------------------------------------------+----------------+
-; Estimate of Logic utilization (ALMs needed) ; 0              ;
-;                                             ;                ;
-; Combinational ALUT usage for logic          ; 0              ;
-;     -- 7 input functions                    ; 0              ;
-;     -- 6 input functions                    ; 0              ;
-;     -- 5 input functions                    ; 0              ;
-;     -- 4 input functions                    ; 0              ;
-;     -- <=3 input functions                  ; 0              ;
-;                                             ;                ;
-; Dedicated logic registers                   ; 0              ;
-;                                             ;                ;
-; I/O pins                                    ; 25             ;
-;                                             ;                ;
-; Total DSP Blocks                            ; 0              ;
-;                                             ;                ;
-; Maximum fan-out node                        ; HEX1[0]~output ;
-; Maximum fan-out                             ; 1              ;
-; Total fan-out                               ; 25             ;
-; Average fan-out                             ; 0.50           ;
-+---------------------------------------------+----------------+
++---------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary             ;
++---------------------------------------------+-----------+
+; Resource                                    ; Usage     ;
++---------------------------------------------+-----------+
+; Estimate of Logic utilization (ALMs needed) ; 1015      ;
+;                                             ;           ;
+; Combinational ALUT usage for logic          ; 1283      ;
+;     -- 7 input functions                    ; 3         ;
+;     -- 6 input functions                    ; 742       ;
+;     -- 5 input functions                    ; 228       ;
+;     -- 4 input functions                    ; 214       ;
+;     -- <=3 input functions                  ; 96        ;
+;                                             ;           ;
+; Dedicated logic registers                   ; 296       ;
+;                                             ;           ;
+; I/O pins                                    ; 25        ;
+;                                             ;           ;
+; Total DSP Blocks                            ; 0         ;
+;                                             ;           ;
+; Maximum fan-out node                        ; clk~input ;
+; Maximum fan-out                             ; 296       ;
+; Total fan-out                               ; 7840      ;
+; Average fan-out                             ; 4.81      ;
++---------------------------------------------+-----------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                    ;
-+----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+-------------+--------------+
-; Compilation Hierarchy Node ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name ; Entity Name ; Library Name ;
-+----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+-------------+--------------+
-; |aes                       ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 25   ; 0            ; |aes                ; aes         ; work         ;
-+----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+-------------+--------------+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                             ;
++----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------------------------------+--------------+--------------+
+; Compilation Hierarchy Node ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name                         ; Entity Name  ; Library Name ;
++----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------------------------------+--------------+--------------+
+; |aes                       ; 1283 (0)            ; 296 (0)                   ; 0                 ; 0          ; 25   ; 0            ; |aes                                        ; aes          ; work         ;
+;    |decrypt:a|             ; 1283 (187)          ; 296 (296)                 ; 0                 ; 0          ; 0    ; 0            ; |aes|decrypt:a                              ; decrypt      ; work         ;
+;       |LastRound:rl|       ; 28 (0)              ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |aes|decrypt:a|LastRound:rl                 ; LastRound    ; work         ;
+;          |AddRoundKey:op1| ; 5 (5)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |aes|decrypt:a|LastRound:rl|AddRoundKey:op1 ; AddRoundKey  ; work         ;
+;          |InvSubBytes:op2| ; 23 (23)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |aes|decrypt:a|LastRound:rl|InvSubBytes:op2 ; InvSubBytes  ; work         ;
+;       |Round:r|            ; 1042 (0)            ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |aes|decrypt:a|Round:r                      ; Round        ; work         ;
+;          |AddRoundKey:op1| ; 39 (39)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |aes|decrypt:a|Round:r|AddRoundKey:op1      ; AddRoundKey  ; work         ;
+;          |InvMix:op4|      ; 389 (389)           ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |aes|decrypt:a|Round:r|InvMix:op4           ; InvMix       ; work         ;
+;          |InvSubBytes:op2| ; 614 (614)           ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |aes|decrypt:a|Round:r|InvSubBytes:op2      ; InvSubBytes  ; work         ;
+;       |SevenSegment:show|  ; 26 (26)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |aes|decrypt:a|SevenSegment:show            ; SevenSegment ; work         ;
++----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------------------------------+--------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
-
-
-+---------------------------------------------------------------------------------+
-; Registers Removed During Synthesis                                              ;
-+----------------------------------------+----------------------------------------+
-; Register name                          ; Reason for Removal                     ;
-+----------------------------------------+----------------------------------------+
-; decrypt:a|tempo[1..7]                  ; Merged with decrypt:a|tempo[0]         ;
-; decrypt:a|tempo[0]                     ; Stuck at GND due to stuck port data_in ;
-; decrypt:a|count[0..31]                 ; Lost fanout                            ;
-; Total Number of Removed Registers = 40 ;                                        ;
-+----------------------------------------+----------------------------------------+
-
-
-+--------------------------------------------------------------------------------------------------------------------------------------+
-; Removed Registers Triggering Further Register Optimizations                                                                          ;
-+--------------------+---------------------------+-------------------------------------------------------------------------------------+
-; Register name      ; Reason for Removal        ; Registers Removed due to This Register                                              ;
-+--------------------+---------------------------+-------------------------------------------------------------------------------------+
-; decrypt:a|tempo[0] ; Stuck at GND              ; decrypt:a|count[23], decrypt:a|count[24], decrypt:a|count[25], decrypt:a|count[26], ;
-;                    ; due to stuck port data_in ; decrypt:a|count[27], decrypt:a|count[28], decrypt:a|count[29], decrypt:a|count[30], ;
-;                    ;                           ; decrypt:a|count[31]                                                                 ;
-; decrypt:a|count[1] ; Lost Fanouts              ; decrypt:a|count[2], decrypt:a|count[3], decrypt:a|count[4], decrypt:a|count[5]      ;
-+--------------------+---------------------------+-------------------------------------------------------------------------------------+
 
 
 +------------------------------------------------------+
@@ -258,14 +240,40 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 0     ;
-; Number of registers using Synchronous Clear  ; 0     ;
-; Number of registers using Synchronous Load   ; 0     ;
+; Total registers                              ; 296   ;
+; Number of registers using Synchronous Clear  ; 124   ;
+; Number of registers using Synchronous Load   ; 137   ;
 ; Number of registers using Asynchronous Clear ; 0     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 0     ;
+; Number of registers using Clock Enable       ; 264   ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
+
+
++--------------------------------------------------+
+; Inverted Register Statistics                     ;
++----------------------------------------+---------+
+; Inverted Register                      ; Fan out ;
++----------------------------------------+---------+
+; decrypt:a|count[0]                     ; 134     ;
+; Total number of inverted registers = 1 ;         ;
++----------------------------------------+---------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                      ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output            ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------+
+; 3:1                ; 8 bits    ; 16 LEs        ; 0 LEs                ; 16 LEs                 ; Yes        ; |aes|decrypt:a|tempo[2]               ;
+; 3:1                ; 132 bits  ; 264 LEs       ; 132 LEs              ; 132 LEs                ; Yes        ; |aes|decrypt:a|temp_key[94]           ;
+; 3:1                ; 124 bits  ; 248 LEs       ; 0 LEs                ; 248 LEs                ; Yes        ; |aes|decrypt:a|temp_in[85]            ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |aes|decrypt:a|SevenSegment:show|H[1] ;
+; 5:1                ; 2 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; No         ; |aes|decrypt:a|SevenSegment:show|O[6] ;
+; 5:1                ; 2 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; No         ; |aes|decrypt:a|SevenSegment:show|T[5] ;
+; 6:1                ; 3 bits    ; 12 LEs        ; 12 LEs               ; 0 LEs                  ; No         ; |aes|decrypt:a|SevenSegment:show|O[3] ;
+; 6:1                ; 3 bits    ; 12 LEs        ; 12 LEs               ; 0 LEs                  ; No         ; |aes|decrypt:a|SevenSegment:show|T[2] ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------+
 
 
 +-------------------------------------------------------------+
@@ -277,42 +285,6 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; nr             ; 14    ; Signed Integer                     ;
 +----------------+-------+------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "decrypt:a|LastRound:rl|ShiftRows_inv:op3"                                                                                                     ;
-+------+-------+----------+------------------------------------------------------------------------------------------------------------------------------------------------+
-; Port ; Type  ; Severity ; Details                                                                                                                                        ;
-+------+-------+----------+------------------------------------------------------------------------------------------------------------------------------------------------+
-; in   ; Input ; Warning  ; Input port expression (1 bits) is smaller than the input port (128 bits) it drives.  Extra input bit(s) "in[0..126]" will be connected to GND. ;
-+------+-------+----------+------------------------------------------------------------------------------------------------------------------------------------------------+
-
-
-+----------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "decrypt:a|LastRound:rl|InvSubBytes:op2"                                             ;
-+------+--------+----------+-------------------------------------------------------------------------------------+
-; Port ; Type   ; Severity ; Details                                                                             ;
-+------+--------+----------+-------------------------------------------------------------------------------------+
-; outp ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-+------+--------+----------+-------------------------------------------------------------------------------------+
-
-
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "decrypt:a|Round:r|ShiftRows_inv:op3"                                                                                                          ;
-+------+-------+----------+------------------------------------------------------------------------------------------------------------------------------------------------+
-; Port ; Type  ; Severity ; Details                                                                                                                                        ;
-+------+-------+----------+------------------------------------------------------------------------------------------------------------------------------------------------+
-; in   ; Input ; Warning  ; Input port expression (1 bits) is smaller than the input port (128 bits) it drives.  Extra input bit(s) "in[0..126]" will be connected to GND. ;
-+------+-------+----------+------------------------------------------------------------------------------------------------------------------------------------------------+
-
-
-+----------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "decrypt:a|Round:r|InvSubBytes:op2"                                                  ;
-+------+--------+----------+-------------------------------------------------------------------------------------+
-; Port ; Type   ; Severity ; Details                                                                             ;
-+------+--------+----------+-------------------------------------------------------------------------------------+
-; outp ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-+------+--------+----------+-------------------------------------------------------------------------------------+
 
 
 +------------------------------------------------------------------------------------------------------------------------+
@@ -521,13 +493,29 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-----------------------+-----------------------------+
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
-; arriav_lcell_comb     ; 2                           ;
-;     normal            ; 2                           ;
-;         0 data inputs ; 2                           ;
+; arriav_ff             ; 296                         ;
+;     ENA               ; 3                           ;
+;     ENA SCLR          ; 124                         ;
+;     ENA SLD           ; 137                         ;
+;     plain             ; 32                          ;
+; arriav_lcell_comb     ; 1286                        ;
+;     arith             ; 31                          ;
+;         1 data inputs ; 30                          ;
+;         2 data inputs ; 1                           ;
+;     extend            ; 3                           ;
+;         7 data inputs ; 3                           ;
+;     normal            ; 1252                        ;
+;         0 data inputs ; 1                           ;
+;         1 data inputs ; 3                           ;
+;         2 data inputs ; 54                          ;
+;         3 data inputs ; 10                          ;
+;         4 data inputs ; 214                         ;
+;         5 data inputs ; 228                         ;
+;         6 data inputs ; 742                         ;
 ; boundary_port         ; 25                          ;
 ;                       ;                             ;
-; Max LUT depth         ; 0.00                        ;
-; Average LUT depth     ; 0.00                        ;
+; Max LUT depth         ; 5.00                        ;
+; Average LUT depth     ; 4.32                        ;
 +-----------------------+-----------------------------+
 
 
@@ -536,7 +524,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:00     ;
+; Top            ; 00:00:03     ;
 +----------------+--------------+
 
 
@@ -546,7 +534,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
-    Info: Processing started: Thu May  2 04:01:59 2024
+    Info: Processing started: Thu May  2 17:33:42 2024
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Try -c Try
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
@@ -576,25 +564,7 @@ Info (12021): Found 1 design units, including 1 entities, in source file invsubb
     Info (12023): Found entity 1: InvSubBytes File: D:/Computer department/sem 2/Sim/InvSubBytes.v Line: 1
 Info (12021): Found 2 design units, including 2 entities, in source file round_decrypt.v
     Info (12023): Found entity 1: Round File: D:/Computer department/sem 2/Sim/Round_Decrypt.v Line: 1
-    Info (12023): Found entity 2: LastRound File: D:/Computer department/sem 2/Sim/Round_Decrypt.v Line: 10
-Warning (10236): Verilog HDL Implicit Net warning at SubBytes.v(8): created implicit net for "st00" File: D:/Computer department/sem 2/Sim/SubBytes.v Line: 8
-Warning (10236): Verilog HDL Implicit Net warning at SubBytes.v(8): created implicit net for "st01" File: D:/Computer department/sem 2/Sim/SubBytes.v Line: 8
-Warning (10236): Verilog HDL Implicit Net warning at SubBytes.v(8): created implicit net for "st02" File: D:/Computer department/sem 2/Sim/SubBytes.v Line: 8
-Warning (10236): Verilog HDL Implicit Net warning at SubBytes.v(8): created implicit net for "st03" File: D:/Computer department/sem 2/Sim/SubBytes.v Line: 8
-Warning (10236): Verilog HDL Implicit Net warning at SubBytes.v(9): created implicit net for "st10" File: D:/Computer department/sem 2/Sim/SubBytes.v Line: 9
-Warning (10236): Verilog HDL Implicit Net warning at SubBytes.v(9): created implicit net for "st11" File: D:/Computer department/sem 2/Sim/SubBytes.v Line: 9
-Warning (10236): Verilog HDL Implicit Net warning at SubBytes.v(9): created implicit net for "st12" File: D:/Computer department/sem 2/Sim/SubBytes.v Line: 9
-Warning (10236): Verilog HDL Implicit Net warning at SubBytes.v(9): created implicit net for "st13" File: D:/Computer department/sem 2/Sim/SubBytes.v Line: 9
-Warning (10236): Verilog HDL Implicit Net warning at SubBytes.v(10): created implicit net for "st20" File: D:/Computer department/sem 2/Sim/SubBytes.v Line: 10
-Warning (10236): Verilog HDL Implicit Net warning at SubBytes.v(10): created implicit net for "st21" File: D:/Computer department/sem 2/Sim/SubBytes.v Line: 10
-Warning (10236): Verilog HDL Implicit Net warning at SubBytes.v(10): created implicit net for "st22" File: D:/Computer department/sem 2/Sim/SubBytes.v Line: 10
-Warning (10236): Verilog HDL Implicit Net warning at SubBytes.v(10): created implicit net for "st23" File: D:/Computer department/sem 2/Sim/SubBytes.v Line: 10
-Warning (10236): Verilog HDL Implicit Net warning at SubBytes.v(11): created implicit net for "st30" File: D:/Computer department/sem 2/Sim/SubBytes.v Line: 11
-Warning (10236): Verilog HDL Implicit Net warning at SubBytes.v(11): created implicit net for "st31" File: D:/Computer department/sem 2/Sim/SubBytes.v Line: 11
-Warning (10236): Verilog HDL Implicit Net warning at SubBytes.v(11): created implicit net for "st32" File: D:/Computer department/sem 2/Sim/SubBytes.v Line: 11
-Warning (10236): Verilog HDL Implicit Net warning at SubBytes.v(11): created implicit net for "st33" File: D:/Computer department/sem 2/Sim/SubBytes.v Line: 11
-Warning (10236): Verilog HDL Implicit Net warning at Round_Decrypt.v(5): created implicit net for "tmep3" File: D:/Computer department/sem 2/Sim/Round_Decrypt.v Line: 5
-Warning (10236): Verilog HDL Implicit Net warning at Round_Decrypt.v(14): created implicit net for "tmep3" File: D:/Computer department/sem 2/Sim/Round_Decrypt.v Line: 14
+    Info (12023): Found entity 2: LastRound File: D:/Computer department/sem 2/Sim/Round_Decrypt.v Line: 13
 Info (12127): Elaborating entity "aes" for the top level hierarchy
 Warning (10036): Verilog HDL or VHDL warning at AES.v(7): object "temp_encrypted" assigned a value but never read File: D:/Computer department/sem 2/Sim/AES.v Line: 7
 Warning (10858): Verilog HDL warning at AES.v(8): object decrypted used but never assigned File: D:/Computer department/sem 2/Sim/AES.v Line: 8
@@ -602,56 +572,85 @@ Warning (10030): Net "decrypted" at AES.v(8) has no driver or initial value, usi
 Info (12128): Elaborating entity "KeyExpansion" for hierarchy "KeyExpansion:c" File: D:/Computer department/sem 2/Sim/AES.v Line: 13
 Info (12128): Elaborating entity "decrypt" for hierarchy "decrypt:a" File: D:/Computer department/sem 2/Sim/AES.v Line: 14
 Info (12128): Elaborating entity "Round" for hierarchy "decrypt:a|Round:r" File: D:/Computer department/sem 2/Sim/Decrypt.v Line: 47
-Info (12128): Elaborating entity "AddRoundKey" for hierarchy "decrypt:a|Round:r|AddRoundKey:op1" File: D:/Computer department/sem 2/Sim/Round_Decrypt.v Line: 3
-Info (12128): Elaborating entity "InvSubBytes" for hierarchy "decrypt:a|Round:r|InvSubBytes:op2" File: D:/Computer department/sem 2/Sim/Round_Decrypt.v Line: 4
-Info (12128): Elaborating entity "ShiftRows_inv" for hierarchy "decrypt:a|Round:r|ShiftRows_inv:op3" File: D:/Computer department/sem 2/Sim/Round_Decrypt.v Line: 5
-Info (12128): Elaborating entity "InvMix" for hierarchy "decrypt:a|Round:r|InvMix:op4" File: D:/Computer department/sem 2/Sim/Round_Decrypt.v Line: 6
+Info (12128): Elaborating entity "ShiftRows_inv" for hierarchy "decrypt:a|Round:r|ShiftRows_inv:op3" File: D:/Computer department/sem 2/Sim/Round_Decrypt.v Line: 6
+Info (12128): Elaborating entity "InvSubBytes" for hierarchy "decrypt:a|Round:r|InvSubBytes:op2" File: D:/Computer department/sem 2/Sim/Round_Decrypt.v Line: 7
+Info (12128): Elaborating entity "AddRoundKey" for hierarchy "decrypt:a|Round:r|AddRoundKey:op1" File: D:/Computer department/sem 2/Sim/Round_Decrypt.v Line: 8
+Info (12128): Elaborating entity "InvMix" for hierarchy "decrypt:a|Round:r|InvMix:op4" File: D:/Computer department/sem 2/Sim/Round_Decrypt.v Line: 9
 Warning (10776): Verilog HDL warning at InvMix.v(20): variable product in static task or function product may have unintended latch behavior File: D:/Computer department/sem 2/Sim/InvMix.v Line: 20
 Warning (10241): Verilog HDL Function Declaration warning at InvMix.v(20): function "product" may return a Don't Care value because its output register may not be assigned a value in every possible path through the function File: D:/Computer department/sem 2/Sim/InvMix.v Line: 20
 Warning (10030): Net "product" at InvMix.v(20) has no driver or initial value, using a default initial value '0' File: D:/Computer department/sem 2/Sim/InvMix.v Line: 20
 Info (12128): Elaborating entity "LastRound" for hierarchy "decrypt:a|LastRound:rl" File: D:/Computer department/sem 2/Sim/Decrypt.v Line: 48
 Info (12128): Elaborating entity "SevenSegment" for hierarchy "decrypt:a|SevenSegment:show" File: D:/Computer department/sem 2/Sim/Decrypt.v Line: 49
 Warning (10230): Verilog HDL assignment warning at SevenSegment.v(52): truncated value with size 32 to match size of target (4) File: D:/Computer department/sem 2/Sim/SevenSegment.v Line: 52
-Warning (12241): 2 hierarchies have connectivity warnings - see the Connectivity Checks report folder
+Info (276014): Found 52 instances of uninferred RAM logic
+    Info (276007): RAM logic "KeyExpansion:c|Ram0" is uninferred due to asynchronous read logic File: D:/Computer department/sem 2/Sim/KeyExpansion.v Line: 81
+    Info (276007): RAM logic "KeyExpansion:c|Ram1" is uninferred due to asynchronous read logic File: D:/Computer department/sem 2/Sim/KeyExpansion.v Line: 81
+    Info (276007): RAM logic "KeyExpansion:c|Ram2" is uninferred due to asynchronous read logic File: D:/Computer department/sem 2/Sim/KeyExpansion.v Line: 81
+    Info (276007): RAM logic "KeyExpansion:c|Ram3" is uninferred due to asynchronous read logic File: D:/Computer department/sem 2/Sim/KeyExpansion.v Line: 81
+    Info (276007): RAM logic "KeyExpansion:c|Ram4" is uninferred due to asynchronous read logic File: D:/Computer department/sem 2/Sim/KeyExpansion.v Line: 81
+    Info (276007): RAM logic "KeyExpansion:c|Ram5" is uninferred due to asynchronous read logic File: D:/Computer department/sem 2/Sim/KeyExpansion.v Line: 81
+    Info (276007): RAM logic "KeyExpansion:c|Ram6" is uninferred due to asynchronous read logic File: D:/Computer department/sem 2/Sim/KeyExpansion.v Line: 81
+    Info (276007): RAM logic "KeyExpansion:c|Ram7" is uninferred due to asynchronous read logic File: D:/Computer department/sem 2/Sim/KeyExpansion.v Line: 81
+    Info (276007): RAM logic "KeyExpansion:c|Ram8" is uninferred due to asynchronous read logic File: D:/Computer department/sem 2/Sim/KeyExpansion.v Line: 81
+    Info (276007): RAM logic "KeyExpansion:c|Ram9" is uninferred due to asynchronous read logic File: D:/Computer department/sem 2/Sim/KeyExpansion.v Line: 81
+    Info (276007): RAM logic "KeyExpansion:c|Ram10" is uninferred due to asynchronous read logic File: D:/Computer department/sem 2/Sim/KeyExpansion.v Line: 81
+    Info (276007): RAM logic "KeyExpansion:c|Ram11" is uninferred due to asynchronous read logic File: D:/Computer department/sem 2/Sim/KeyExpansion.v Line: 81
+    Info (276007): RAM logic "KeyExpansion:c|Ram12" is uninferred due to asynchronous read logic File: D:/Computer department/sem 2/Sim/KeyExpansion.v Line: 81
+    Info (276007): RAM logic "KeyExpansion:c|Ram13" is uninferred due to asynchronous read logic File: D:/Computer department/sem 2/Sim/KeyExpansion.v Line: 81
+    Info (276007): RAM logic "KeyExpansion:c|Ram14" is uninferred due to asynchronous read logic File: D:/Computer department/sem 2/Sim/KeyExpansion.v Line: 81
+    Info (276007): RAM logic "KeyExpansion:c|Ram15" is uninferred due to asynchronous read logic File: D:/Computer department/sem 2/Sim/KeyExpansion.v Line: 81
+    Info (276007): RAM logic "KeyExpansion:c|Ram16" is uninferred due to asynchronous read logic File: D:/Computer department/sem 2/Sim/KeyExpansion.v Line: 81
+    Info (276007): RAM logic "KeyExpansion:c|Ram17" is uninferred due to asynchronous read logic File: D:/Computer department/sem 2/Sim/KeyExpansion.v Line: 81
+    Info (276007): RAM logic "KeyExpansion:c|Ram18" is uninferred due to asynchronous read logic File: D:/Computer department/sem 2/Sim/KeyExpansion.v Line: 81
+    Info (276007): RAM logic "KeyExpansion:c|Ram19" is uninferred due to asynchronous read logic File: D:/Computer department/sem 2/Sim/KeyExpansion.v Line: 81
+    Info (276007): RAM logic "KeyExpansion:c|Ram20" is uninferred due to asynchronous read logic File: D:/Computer department/sem 2/Sim/KeyExpansion.v Line: 81
+    Info (276007): RAM logic "KeyExpansion:c|Ram21" is uninferred due to asynchronous read logic File: D:/Computer department/sem 2/Sim/KeyExpansion.v Line: 81
+    Info (276007): RAM logic "KeyExpansion:c|Ram22" is uninferred due to asynchronous read logic File: D:/Computer department/sem 2/Sim/KeyExpansion.v Line: 81
+    Info (276007): RAM logic "KeyExpansion:c|Ram23" is uninferred due to asynchronous read logic File: D:/Computer department/sem 2/Sim/KeyExpansion.v Line: 81
+    Info (276007): RAM logic "KeyExpansion:c|Ram24" is uninferred due to asynchronous read logic File: D:/Computer department/sem 2/Sim/KeyExpansion.v Line: 81
+    Info (276007): RAM logic "KeyExpansion:c|Ram25" is uninferred due to asynchronous read logic File: D:/Computer department/sem 2/Sim/KeyExpansion.v Line: 81
+    Info (276007): RAM logic "KeyExpansion:c|Ram26" is uninferred due to asynchronous read logic File: D:/Computer department/sem 2/Sim/KeyExpansion.v Line: 81
+    Info (276007): RAM logic "KeyExpansion:c|Ram27" is uninferred due to asynchronous read logic File: D:/Computer department/sem 2/Sim/KeyExpansion.v Line: 81
+    Info (276007): RAM logic "KeyExpansion:c|Ram28" is uninferred due to asynchronous read logic File: D:/Computer department/sem 2/Sim/KeyExpansion.v Line: 81
+    Info (276007): RAM logic "KeyExpansion:c|Ram29" is uninferred due to asynchronous read logic File: D:/Computer department/sem 2/Sim/KeyExpansion.v Line: 81
+    Info (276007): RAM logic "KeyExpansion:c|Ram30" is uninferred due to asynchronous read logic File: D:/Computer department/sem 2/Sim/KeyExpansion.v Line: 81
+    Info (276007): RAM logic "KeyExpansion:c|Ram31" is uninferred due to asynchronous read logic File: D:/Computer department/sem 2/Sim/KeyExpansion.v Line: 81
+    Info (276007): RAM logic "KeyExpansion:c|Ram32" is uninferred due to asynchronous read logic File: D:/Computer department/sem 2/Sim/KeyExpansion.v Line: 81
+    Info (276007): RAM logic "KeyExpansion:c|Ram33" is uninferred due to asynchronous read logic File: D:/Computer department/sem 2/Sim/KeyExpansion.v Line: 81
+    Info (276007): RAM logic "KeyExpansion:c|Ram34" is uninferred due to asynchronous read logic File: D:/Computer department/sem 2/Sim/KeyExpansion.v Line: 81
+    Info (276007): RAM logic "KeyExpansion:c|Ram35" is uninferred due to asynchronous read logic File: D:/Computer department/sem 2/Sim/KeyExpansion.v Line: 81
+    Info (276007): RAM logic "KeyExpansion:c|Ram36" is uninferred due to asynchronous read logic File: D:/Computer department/sem 2/Sim/KeyExpansion.v Line: 81
+    Info (276007): RAM logic "KeyExpansion:c|Ram37" is uninferred due to asynchronous read logic File: D:/Computer department/sem 2/Sim/KeyExpansion.v Line: 81
+    Info (276007): RAM logic "KeyExpansion:c|Ram38" is uninferred due to asynchronous read logic File: D:/Computer department/sem 2/Sim/KeyExpansion.v Line: 81
+    Info (276007): RAM logic "KeyExpansion:c|Ram39" is uninferred due to asynchronous read logic File: D:/Computer department/sem 2/Sim/KeyExpansion.v Line: 81
+    Info (276007): RAM logic "KeyExpansion:c|Ram40" is uninferred due to asynchronous read logic File: D:/Computer department/sem 2/Sim/KeyExpansion.v Line: 81
+    Info (276007): RAM logic "KeyExpansion:c|Ram41" is uninferred due to asynchronous read logic File: D:/Computer department/sem 2/Sim/KeyExpansion.v Line: 81
+    Info (276007): RAM logic "KeyExpansion:c|Ram42" is uninferred due to asynchronous read logic File: D:/Computer department/sem 2/Sim/KeyExpansion.v Line: 81
+    Info (276007): RAM logic "KeyExpansion:c|Ram43" is uninferred due to asynchronous read logic File: D:/Computer department/sem 2/Sim/KeyExpansion.v Line: 81
+    Info (276007): RAM logic "KeyExpansion:c|Ram44" is uninferred due to asynchronous read logic File: D:/Computer department/sem 2/Sim/KeyExpansion.v Line: 81
+    Info (276007): RAM logic "KeyExpansion:c|Ram45" is uninferred due to asynchronous read logic File: D:/Computer department/sem 2/Sim/KeyExpansion.v Line: 81
+    Info (276007): RAM logic "KeyExpansion:c|Ram46" is uninferred due to asynchronous read logic File: D:/Computer department/sem 2/Sim/KeyExpansion.v Line: 81
+    Info (276007): RAM logic "KeyExpansion:c|Ram47" is uninferred due to asynchronous read logic File: D:/Computer department/sem 2/Sim/KeyExpansion.v Line: 81
+    Info (276007): RAM logic "KeyExpansion:c|Ram48" is uninferred due to asynchronous read logic File: D:/Computer department/sem 2/Sim/KeyExpansion.v Line: 81
+    Info (276007): RAM logic "KeyExpansion:c|Ram49" is uninferred due to asynchronous read logic File: D:/Computer department/sem 2/Sim/KeyExpansion.v Line: 81
+    Info (276007): RAM logic "KeyExpansion:c|Ram50" is uninferred due to asynchronous read logic File: D:/Computer department/sem 2/Sim/KeyExpansion.v Line: 81
+    Info (276007): RAM logic "KeyExpansion:c|Ram51" is uninferred due to asynchronous read logic File: D:/Computer department/sem 2/Sim/KeyExpansion.v Line: 81
 Warning (13024): Output pins are stuck at VCC or GND
-    Warning (13410): Pin "HEX1[0]" is stuck at GND File: D:/Computer department/sem 2/Sim/AES.v Line: 1
-    Warning (13410): Pin "HEX1[1]" is stuck at GND File: D:/Computer department/sem 2/Sim/AES.v Line: 1
-    Warning (13410): Pin "HEX1[2]" is stuck at GND File: D:/Computer department/sem 2/Sim/AES.v Line: 1
-    Warning (13410): Pin "HEX1[3]" is stuck at GND File: D:/Computer department/sem 2/Sim/AES.v Line: 1
-    Warning (13410): Pin "HEX1[4]" is stuck at GND File: D:/Computer department/sem 2/Sim/AES.v Line: 1
-    Warning (13410): Pin "HEX1[5]" is stuck at GND File: D:/Computer department/sem 2/Sim/AES.v Line: 1
-    Warning (13410): Pin "HEX1[6]" is stuck at VCC File: D:/Computer department/sem 2/Sim/AES.v Line: 1
-    Warning (13410): Pin "HEX2[0]" is stuck at GND File: D:/Computer department/sem 2/Sim/AES.v Line: 1
-    Warning (13410): Pin "HEX2[1]" is stuck at GND File: D:/Computer department/sem 2/Sim/AES.v Line: 1
-    Warning (13410): Pin "HEX2[2]" is stuck at GND File: D:/Computer department/sem 2/Sim/AES.v Line: 1
-    Warning (13410): Pin "HEX2[3]" is stuck at GND File: D:/Computer department/sem 2/Sim/AES.v Line: 1
-    Warning (13410): Pin "HEX2[4]" is stuck at GND File: D:/Computer department/sem 2/Sim/AES.v Line: 1
-    Warning (13410): Pin "HEX2[5]" is stuck at GND File: D:/Computer department/sem 2/Sim/AES.v Line: 1
-    Warning (13410): Pin "HEX2[6]" is stuck at VCC File: D:/Computer department/sem 2/Sim/AES.v Line: 1
-    Warning (13410): Pin "HEX3[0]" is stuck at GND File: D:/Computer department/sem 2/Sim/AES.v Line: 1
     Warning (13410): Pin "HEX3[1]" is stuck at GND File: D:/Computer department/sem 2/Sim/AES.v Line: 1
-    Warning (13410): Pin "HEX3[2]" is stuck at GND File: D:/Computer department/sem 2/Sim/AES.v Line: 1
-    Warning (13410): Pin "HEX3[3]" is stuck at GND File: D:/Computer department/sem 2/Sim/AES.v Line: 1
-    Warning (13410): Pin "HEX3[4]" is stuck at GND File: D:/Computer department/sem 2/Sim/AES.v Line: 1
-    Warning (13410): Pin "HEX3[5]" is stuck at GND File: D:/Computer department/sem 2/Sim/AES.v Line: 1
-    Warning (13410): Pin "HEX3[6]" is stuck at VCC File: D:/Computer department/sem 2/Sim/AES.v Line: 1
     Warning (13410): Pin "check" is stuck at GND File: D:/Computer department/sem 2/Sim/AES.v Line: 1
-Info (17049): 32 registers lost all their fanouts during netlist optimizations.
+Info (286030): Timing-Driven Synthesis is running
 Info (144001): Generated suppressed messages file D:/Computer department/sem 2/Sim/output_files/Try.map.smsg
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Warning (21074): Design contains 3 input pin(s) that do not drive logic
-    Warning (15610): No output dependent on input pin "switch[0]" File: D:/Computer department/sem 2/Sim/AES.v Line: 1
-    Warning (15610): No output dependent on input pin "switch[1]" File: D:/Computer department/sem 2/Sim/AES.v Line: 1
-    Warning (15610): No output dependent on input pin "clk" File: D:/Computer department/sem 2/Sim/AES.v Line: 1
-Info (21057): Implemented 25 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 1318 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 3 input pins
     Info (21059): Implemented 22 output pins
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 54 warnings
-    Info: Peak virtual memory: 4852 megabytes
-    Info: Processing ended: Thu May  2 04:02:21 2024
-    Info: Elapsed time: 00:00:22
-    Info: Total CPU time (on all processors): 00:00:32
+    Info (21061): Implemented 1293 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 11 warnings
+    Info: Peak virtual memory: 4845 megabytes
+    Info: Processing ended: Thu May  2 17:33:58 2024
+    Info: Elapsed time: 00:00:16
+    Info: Total CPU time (on all processors): 00:00:19
 
 
 +------------------------------------------+
