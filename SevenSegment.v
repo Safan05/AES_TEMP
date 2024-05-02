@@ -31,7 +31,7 @@ end
 
 function [3:0]out(input [3:0]in);
 begin
-case(in) 
+/*case(in) 
 // smaller than 5 as it is
 4'b0000: out=4'b0000;//0
 4'b0001: out=4'b0001;//1
@@ -45,33 +45,36 @@ case(in)
 4'b0111: out=4'b1010;//7 --> 10
 4'b1000: out=4'b1011;//8 --> 11
 4'b1001: out=4'b1100;//9 --> 12
-endcase
-
+endcase*/
+if(in<4'd5)
+out=in;
+else
+out=in+3;
 end
 endfunction
 
 function [6:0]Hex(input [3:0] temp);
 begin
 if(temp==4'b0000)
-Hex=7'b1000000;
+Hex=7'b1000000; //0
 else if(temp==4'b0001)
-Hex=7'b1111001;
+Hex=7'b1111001; //1
 else if(temp==4'b0010)
-Hex=7'b0100100;
+Hex=7'b0100100; //2
 else if(temp==4'b0011)
-Hex=7'b0110000;
+Hex=7'b0110000; //3
 else if(temp==4'b0100)
-Hex=7'b0011001;
+Hex=7'b0011001; //4
 else if(temp==4'b0101)
-Hex=7'b0010010;
+Hex=7'b0010010; //5
 else if(temp==4'b0110)
-Hex=7'b0000010;
+Hex=7'b0000010; //6
 else if(temp==4'b0111)
-Hex=7'b1111000;
+Hex=7'b1111000; //7
 else if(temp==4'b1000)
-Hex=7'b0000000;
+Hex=7'b0000000; //8
 else if(temp==4'b1001)
-Hex=7'b0010000;
+Hex=7'b0010000; //9
 else
 Hex=7'b1111111;
 end 

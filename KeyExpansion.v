@@ -1,5 +1,6 @@
-module AddRoundKey(input [0:127] in,input [0:127] key_add, output [0:127] out); // take 128 bit from the expanded key and xor them with the input 128 bits , as you proceed the next round you proceed the upcoming 128 bit of the expanded key
-assign out=in^key_add;
+module AddRoundKey(input [0:127] in,input [0:127] key_add, output reg [0:127] out); // take 128 bit from the expanded key and xor them with the input 128 bits , as you proceed the next round you proceed the upcoming 128 bit of the expanded key
+always @(*)
+out=in^key_add;
 endmodule
 
 module KeyExpansion#(parameter Nk=4,parameter nr=10)(key,w);

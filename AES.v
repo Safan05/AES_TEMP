@@ -32,6 +32,7 @@ reg clk;
 reg [127:0]in=128'h8ea2b7ca516745bfeafc49904b496089;
 reg [255:0]key_256=256'h000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f;
 wire [1919:0]expanded_key;
+wire [127:0]encrypted;
 reg [1919:0]e_key;
 KeyExpansion#(8,14) expo(key_256,expanded_key);
 initial begin
