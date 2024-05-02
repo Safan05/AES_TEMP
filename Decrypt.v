@@ -27,16 +27,11 @@ temp_in<=in^key_d[127:0];
 temp_key<=key_d[255:128];
 count=count+1;
 end
-else if(count>nr && count <(2*nr))
+else if(count>nr && count <(2*nr)+1)
 begin
 temp_in<=temp_out;
 temp_key<=key_d[(((count-nr+2)*128)-1)-:128];
 tempo<=temp_out;
-count=count+1;
-end
-else if(count==((2*nr)))
-begin
-tempo<=temp_out_last;
 count=count+1;
 end
 else
@@ -44,7 +39,6 @@ count=count+1;
 end
 
 assign out=tempo;
-Round r(temp_in,temp_key,temp_out);
-LastRound rl(temp_in,temp_key,temp_out_last);
+Round r(temp_in,temp_key,temp_out,switch,clk);
 SevenSegment show(tempo[7:0],h1,h2,h3);
 endmodule

@@ -84,7 +84,7 @@
 					"strict" : false
 				},
 				{
-					"name" : "clk",
+					"name" : "switch[0]",
 					"strict" : false
 				},
 				{
@@ -92,7 +92,7 @@
 					"strict" : false
 				},
 				{
-					"name" : "switch[0]",
+					"name" : "clk",
 					"strict" : false
 				}
 			]
