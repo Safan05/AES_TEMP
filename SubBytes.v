@@ -33,9 +33,9 @@ begin
  
 
  ss00 =c(s00); ss01 =c(s01); ss02=c(s02); ss03=c(s03);
- ss10 =c(s00); ss11 =c(s01); ss12=c(s02); ss13=c(s03);
- ss20 =c(s00); ss21 =c(s01); ss22=c(s02); ss23=c(s03);
- ss30 =c(s00); ss31 =c(s01); ss32=c(s02); ss33=c(s03);
+ ss10 =c(s10); ss11 =c(s11); ss12=c(s12); ss13=c(s13);
+ ss20 =c(s20); ss21 =c(s21); ss22=c(s22); ss23=c(s23);
+ ss30 =c(s30); ss31 =c(s31); ss32=c(s32); ss33=c(s33);
 
  SubBytes[0:7]=ss00;      SubBytes[8:15]=ss01;    SubBytes[16:23]=ss02;    SubBytes[24:31]=ss03;
  SubBytes[32:39]=ss10;    SubBytes[40:47]=ss11;   SubBytes[48:55]=ss12;    SubBytes[56:63]=ss13;

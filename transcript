@@ -1,0 +1,245 @@
+# Compile of Encrypt.v was successful.
+vsim -gui work.Test
+# vsim -gui work.Test 
+# Start time: 16:34:55 on May 03,2024
+# Loading work.Test
+# Loading work.KeyExpansion
+# Loading work.Encrypt
+# Loading work.Round_Encrypt
+# Loading work.SubBytes
+# Loading work.ShiftRows
+# Loading work.MixColumns
+# Loading work.AddRoundKey
+# Loading work.SevenSegment
+# Loading work.decrypt
+# Loading work.Round
+# Loading work.ShiftRows_inv
+# Loading work.InvSubBytes
+# Loading work.InvMix
+add wave -position insertpoint sim:/Test/*
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+# Compile of Encrypt.v was successful.
+vsim -gui work.Test
+# End time: 16:50:56 on May 03,2024, Elapsed time: 0:16:01
+# Errors: 0, Warnings: 3
+# vsim -gui work.Test 
+# Start time: 16:50:56 on May 03,2024
+# Loading work.Test
+# Loading work.KeyExpansion
+# Loading work.Encrypt
+# Loading work.Round_Encrypt
+# Loading work.SubBytes
+# Loading work.ShiftRows
+# Loading work.MixColumns
+# Loading work.AddRoundKey
+# Loading work.SevenSegment
+# Loading work.decrypt
+# Loading work.Round
+# Loading work.ShiftRows_inv
+# Loading work.InvSubBytes
+# Loading work.InvMix
+add wave -position insertpoint sim:/Test/*
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+# Compile of AES.v was successful.
+vsim -gui work.Test
+# End time: 16:54:37 on May 03,2024, Elapsed time: 0:03:41
+# Errors: 0, Warnings: 2
+# vsim -gui work.Test 
+# Start time: 16:54:37 on May 03,2024
+# Loading work.Test
+# Loading work.KeyExpansion
+# Loading work.Encrypt
+# Loading work.Round_Encrypt
+# Loading work.SubBytes
+# Loading work.ShiftRows
+# Loading work.MixColumns
+# Loading work.AddRoundKey
+# Loading work.SevenSegment
+add wave -position insertpoint sim:/Test/*
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+vsim Test
+# End time: 16:55:31 on May 03,2024, Elapsed time: 0:00:54
+# Errors: 0, Warnings: 1
+# vsim Test 
+# Start time: 16:55:31 on May 03,2024
+# Loading work.Test
+# Loading work.KeyExpansion
+# Loading work.Encrypt
+# Loading work.Round_Encrypt
+# Loading work.SubBytes
+# Loading work.ShiftRows
+# Loading work.MixColumns
+# Loading work.AddRoundKey
+# Loading work.SevenSegment
+add wave -position insertpoint sim:/Test/*
+add wave -position end sim:/Test/e/r/sub/*
+add wave -position 14 sim:/Test/e/r/shift/*
+add wave -position 14 sim:/Test/e/r/mix/*
+add wave -position 18 sim:/Test/e/r/op1/*
+run 2000
+# Compile of SubBytes.v was successful.
+# Compile of AES.v was successful.
+# Compile of Decrypt.v was successful.
+# Compile of Encrypt.v was successful.
+# Compile of InvMix.v was successful.
+# Compile of InvSubBytes.v was successful.
+# Compile of KeyExpansion.v was successful.
+# Compile of MixColumns.v was successful.
+# Compile of Round_Decrypt.v was successful.
+# Compile of SevenSegment.v was successful.
+# Compile of ShiftRows.v was successful.
+# Compile of ShiftRows_inv.v was successful.
+# Compile of SubBytes.v was successful.
+# Compile of Round_Encrypt.v was successful.
+# Compile of t.v was successful.
+# 14 compiles, 0 failed with no errors.
+vsim work.Test
+# End time: 17:05:47 on May 03,2024, Elapsed time: 0:10:16
+# Errors: 0, Warnings: 3
+# vsim work.Test 
+# Start time: 17:05:47 on May 03,2024
+# Loading work.Test
+# Loading work.KeyExpansion
+# Loading work.Encrypt
+# Loading work.Round_Encrypt
+# Loading work.SubBytes
+# Loading work.ShiftRows
+# Loading work.MixColumns
+# Loading work.AddRoundKey
+# Loading work.SevenSegment
+add wave -position insertpoint sim:/Test/*
+run 2000
+# Compile of Round_Encrypt.v was successful.
+vsim work.Test
+# End time: 17:11:09 on May 03,2024, Elapsed time: 0:05:22
+# Errors: 0, Warnings: 2
+# vsim work.Test 
+# Start time: 17:11:10 on May 03,2024
+# Loading work.Test
+# Loading work.KeyExpansion
+# Loading work.Encrypt
+# Loading work.Round_Encrypt
+# Loading work.SubBytes
+# Loading work.ShiftRows
+# Loading work.MixColumns
+# Loading work.AddRoundKey
+# Loading work.SevenSegment
+add wave -position insertpoint sim:/Test/*
+run 2000
+# Compile of AES.v was successful.
+# Compile of Decrypt.v was successful.
+# Compile of Encrypt.v was successful.
+# Compile of InvMix.v was successful.
+# Compile of InvSubBytes.v was successful.
+# Compile of KeyExpansion.v was successful.
+# Compile of MixColumns.v was successful.
+# Compile of Round_Decrypt.v was successful.
+# Compile of SevenSegment.v was successful.
+# Compile of ShiftRows.v was successful.
+# Compile of ShiftRows_inv.v was successful.
+# Compile of SubBytes.v was successful.
+# Compile of Round_Encrypt.v was successful.
+# Compile of t.v was successful.
+# 14 compiles, 0 failed with no errors.
+vsim Test
+# End time: 17:12:45 on May 03,2024, Elapsed time: 0:01:35
+# Errors: 0, Warnings: 2
+# vsim Test 
+# Start time: 17:12:45 on May 03,2024
+# Loading work.Test
+# Loading work.KeyExpansion
+# Loading work.Encrypt
+# Loading work.Round_Encrypt
+# Loading work.SubBytes
+# Loading work.ShiftRows
+# Loading work.MixColumns
+# Loading work.AddRoundKey
+# Loading work.SevenSegment
+# Loading work.decrypt
+# Loading work.Round
+# Loading work.ShiftRows_inv
+# Loading work.InvSubBytes
+# Loading work.InvMix
+add wave -position insertpoint sim:/Test/*
+run 2000
+run 2000
+# End time: 17:19:59 on May 03,2024, Elapsed time: 0:07:14
+# Errors: 0, Warnings: 1

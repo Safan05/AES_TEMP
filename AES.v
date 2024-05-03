@@ -24,16 +24,34 @@ decrypt a(in,encrypted,e_key,switch,clk,HEX1,HEX2,HEX3);
 	end
 endmodule
 
+//module t_DUT();
+//reg[127:0] in= 128'h00112233445566778899aabbccddeeff;
+//wire [127:0]oute;
+//wire [1919:0]expanded_key;
+//reg clk;
+//wire [6:0]h,j,k;
+//reg [1:0] sw;
+//wire [255:0] key = 256'h000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f;
+//KeyExpansion#(8,14) expo(key,expanded_key);
+//initial begin
+//clk=1'b0;
+//sw=2'b00;
+//end
+//always #50 clk=~clk;
+//Encrypt v(in,oute,expanded_key,sw,clk,h,j,k);
+//endmodule
+
 module Test();
 wire [6:0] j1,j2,j3;
 reg c;
 reg [1:0] switch;
 reg clk;
-reg [127:0]in=128'h8ea2b7ca516745bfeafc49904b496089;
+reg [127:0]in=128'h00112233445566778899aabbccddeeff;
 reg[127:0] ch=128'h00112233445566778899aabbccddeeff;
 reg [255:0]key_256=256'h000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f;
 wire [1919:0]expanded_key;
 wire [127:0]encrypted;
+wire[127:0]enc_test;
 KeyExpansion#(8,14) expo(key_256,expanded_key);
 initial begin
 clk=0;
@@ -47,5 +65,6 @@ else
 	c=1'b0;
 end
 always #50 clk=~clk;
-decrypt a(in,encrypted,expanded_key,switch,clk,j1,j2,j3);
+Encrypt e(in,enc_test,expanded_key,switch,clk,j1,j2,j3);
+decrypt a(enc_test,encrypted,expanded_key,switch,clk,j1,j2,j3);
 endmodule
