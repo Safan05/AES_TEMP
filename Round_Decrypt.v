@@ -3,7 +3,7 @@ wire [127:0] temp2;
 wire [127:0] temp3;
 wire [127:0] temp4;
 wire [127:0] temp5;
-integer count=1;
+integer count=0;
 integer nr;
 always @(*) begin
     if (switch == 2'b00)

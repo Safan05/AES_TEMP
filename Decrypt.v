@@ -9,7 +9,7 @@ reg [127:0] temp_in,temp_key,temp_in_l,tempo;
 wire [127:0] temp_out,temp_out_last;
 reg [7:0] lastbit;
 output wire [6:0]h1,h2,h3;
-integer count=1;
+integer count=0;
 integer nr;
 always @(*) begin
     if (switch == 2'b00)
@@ -31,13 +31,18 @@ else if(count>nr && count <(2*nr)+1)
 begin
 temp_in<=temp_out;
 temp_key<=key_d[(((count-nr+2)*128)-1)-:128];
-tempo<=temp_out;
 count=count+1;
 end
 else
 count=count+1;
 end
-
+always @(*)
+begin
+if(count <(2*nr)+1)
+tempo=temp_out;
+else
+tempo=128'h00000000000000000000000000000000;
+end
 assign out=tempo;
 Round r(temp_in,temp_key,temp_out,switch,clk);
 SevenSegment show(tempo[7:0],h1,h2,h3);

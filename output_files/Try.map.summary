@@ -1,10 +1,10 @@
-Analysis & Synthesis Status : Successful - Fri May  3 00:46:43 2024
+Analysis & Synthesis Status : Successful - Sat May  4 02:13:35 2024
 Quartus Prime Version : 23.1std.0 Build 991 11/28/2023 SC Lite Edition
 Revision Name : Try
 Top-level Entity Name : aes
 Family : Cyclone V
 Logic utilization (in ALMs) : N/A
-Total registers : 296
+Total registers : 542
 Total pins : 25
 Total virtual pins : 0
 Total block memory bits : 0
