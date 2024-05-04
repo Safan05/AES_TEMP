@@ -38,7 +38,7 @@ begin
 if(count < nr+1)
 tempo=temp_out;
 else
-tempo=128'h00000000000000000000000000000000;
+tempo=out;
 end
 assign out=tempo;
 Round_Encrypt r(temp_in,temp_key,temp_out,switch,clk);

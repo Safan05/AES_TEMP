@@ -31,7 +31,7 @@ else if(element == 8'h0d) begin
         product = multiply_2(i_byte,3) ^ multiply_2(i_byte,2) ^ i_byte;
 end
 
-else if(element == 8'h09) begin
+else begin //if 8'h09 but it's written else due to non interfering latches
        product = multiply_2(i_byte,3) ^ i_byte;
 end
 end

@@ -9,7 +9,7 @@ wire [127:0]decrypted;
 wire[127:0]encrypted;
 integer count=0;
 KeyExpansion#(8,14) expo(key_256,expanded_key);
-integer nr;
+integer nr=10;
 always @(*) begin
     if (switch == 2'b00)
         nr = 10; //128 bit key
@@ -38,12 +38,29 @@ HEX3=j3;
 end
 else
 begin
-HEX1=j1;
-HEX2=j2;
-HEX3=j3;
+HEX1=h1;
+HEX2=h2;
+HEX3=h3;
 end
 end
 endmodule
+
+//module t_DUT();
+//reg[127:0] in= 128'h00112233445566778899aabbccddeeff;
+//wire [127:0]oute;
+//wire [1919:0]expanded_key;
+//reg clk;
+//wire [6:0]h,j,k;
+//reg [1:0] sw;
+//wire [255:0] key = 256'h000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f;
+//KeyExpansion#(8,14) expo(key,expanded_key);
+//initial begin
+//clk=1'b0;
+//sw=2'b00;
+//end
+//always #50 clk=~clk;
+//Encrypt v(in,oute,expanded_key,sw,clk,h,j,k);
+//endmodule
 /*
 module Test();
 wire [6:0] j1,j2,j3;
@@ -60,6 +77,7 @@ wire [1919:0]expanded_key;
 wire [127:0]encrypted;
 wire[127:0]enc_test;
 integer count=0;
+
 KeyExpansion#(8,14) expo(key_256,expanded_key);
 initial begin
 clk=0;

@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Try
-Sat May  4 02:13:35 2024
+Sat May  4 05:16:59 2024
 Quartus Prime Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
 
 
@@ -13,11 +13,11 @@ Quartus Prime Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
   5. Analysis & Synthesis Source Files Read
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
-  8. Registers Removed During Synthesis
-  9. General Register Statistics
- 10. Multiplexer Restructuring Statistics (Restructuring Performed)
- 11. Parameter Settings for User Entity Instance: KeyExpansion:expo
- 12. Port Connectivity Checks: "decrypt:a"
+  8. Logic Cells Representing Combinational Loops
+  9. Registers Removed During Synthesis
+ 10. General Register Statistics
+ 11. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 12. Parameter Settings for User Entity Instance: KeyExpansion:expo
  13. Port Connectivity Checks: "Encrypt:e"
  14. Port Connectivity Checks: "KeyExpansion:expo"
  15. Post-Synthesis Netlist Statistics for Top Partition
@@ -50,7 +50,7 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +---------------------------------+------------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Sat May  4 02:13:35 2024          ;
+; Analysis & Synthesis Status     ; Successful - Sat May  4 05:16:59 2024          ;
 ; Quartus Prime Version           ; 23.1std.0 Build 991 11/28/2023 SC Lite Edition ;
 ; Revision Name                   ; Try                                            ;
 ; Top-level Entity Name           ; aes                                            ;
@@ -201,14 +201,14 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------+-----------+
 ; Resource                                    ; Usage     ;
 +---------------------------------------------+-----------+
-; Estimate of Logic utilization (ALMs needed) ; 2271      ;
+; Estimate of Logic utilization (ALMs needed) ; 2354      ;
 ;                                             ;           ;
-; Combinational ALUT usage for logic          ; 2761      ;
-;     -- 7 input functions                    ; 10        ;
-;     -- 6 input functions                    ; 1666      ;
-;     -- 5 input functions                    ; 291       ;
-;     -- 4 input functions                    ; 335       ;
-;     -- <=3 input functions                  ; 459       ;
+; Combinational ALUT usage for logic          ; 2858      ;
+;     -- 7 input functions                    ; 47        ;
+;     -- 6 input functions                    ; 1698      ;
+;     -- 5 input functions                    ; 408       ;
+;     -- 4 input functions                    ; 338       ;
+;     -- <=3 input functions                  ; 367       ;
 ;                                             ;           ;
 ; Dedicated logic registers                   ; 542       ;
 ;                                             ;           ;
@@ -218,8 +218,8 @@ https://fpgasoftware.intel.com/eula.
 ;                                             ;           ;
 ; Maximum fan-out node                        ; clk~input ;
 ; Maximum fan-out                             ; 542       ;
-; Total fan-out                               ; 16180     ;
-; Average fan-out                             ; 4.83      ;
+; Total fan-out                               ; 17167     ;
+; Average fan-out                             ; 4.98      ;
 +---------------------------------------------+-----------+
 
 
@@ -228,126 +228,269 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+------------------------------------------------+---------------+--------------+
 ; Compilation Hierarchy Node ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name                            ; Entity Name   ; Library Name ;
 +----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+------------------------------------------------+---------------+--------------+
-; |aes                       ; 2761 (47)           ; 542 (0)                   ; 0                 ; 0          ; 25   ; 0            ; |aes                                           ; aes           ; work         ;
-;    |Encrypt:e|             ; 1220 (165)          ; 287 (255)                 ; 0                 ; 0          ; 0    ; 0            ; |aes|Encrypt:e                                 ; Encrypt       ; work         ;
-;       |Round_Encrypt:r|    ; 1027 (235)          ; 32 (32)                   ; 0                 ; 0          ; 0    ; 0            ; |aes|Encrypt:e|Round_Encrypt:r                 ; Round_Encrypt ; work         ;
+; |aes                       ; 2858 (91)           ; 542 (0)                   ; 0                 ; 0          ; 25   ; 0            ; |aes                                           ; aes           ; work         ;
+;    |Encrypt:e|             ; 1294 (290)          ; 287 (255)                 ; 0                 ; 0          ; 0    ; 0            ; |aes|Encrypt:e                                 ; Encrypt       ; work         ;
+;       |Round_Encrypt:r|    ; 986 (194)           ; 32 (32)                   ; 0                 ; 0          ; 0    ; 0            ; |aes|Encrypt:e|Round_Encrypt:r                 ; Round_Encrypt ; work         ;
 ;          |AddRoundKey:op1| ; 152 (152)           ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |aes|Encrypt:e|Round_Encrypt:r|AddRoundKey:op1 ; AddRoundKey   ; work         ;
 ;          |SubBytes:sub|    ; 640 (640)           ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |aes|Encrypt:e|Round_Encrypt:r|SubBytes:sub    ; SubBytes      ; work         ;
-;       |SevenSegment:show|  ; 28 (28)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |aes|Encrypt:e|SevenSegment:show               ; SevenSegment  ; work         ;
-;    |decrypt:a|             ; 1494 (259)          ; 255 (255)                 ; 0                 ; 0          ; 0    ; 0            ; |aes|decrypt:a                                 ; decrypt       ; work         ;
-;       |Round:r|            ; 1235 (99)           ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |aes|decrypt:a|Round:r                         ; Round         ; work         ;
-;          |AddRoundKey:op1| ; 128 (128)           ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |aes|decrypt:a|Round:r|AddRoundKey:op1         ; AddRoundKey   ; work         ;
-;          |InvMix:op4|      ; 378 (378)           ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |aes|decrypt:a|Round:r|InvMix:op4              ; InvMix        ; work         ;
-;          |InvSubBytes:op2| ; 630 (630)           ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |aes|decrypt:a|Round:r|InvSubBytes:op2         ; InvSubBytes   ; work         ;
+;       |SevenSegment:show|  ; 18 (18)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |aes|Encrypt:e|SevenSegment:show               ; SevenSegment  ; work         ;
+;    |decrypt:a|             ; 1473 (263)          ; 255 (255)                 ; 0                 ; 0          ; 0    ; 0            ; |aes|decrypt:a                                 ; decrypt       ; work         ;
+;       |Round:r|            ; 1192 (138)          ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |aes|decrypt:a|Round:r                         ; Round         ; work         ;
+;          |AddRoundKey:op1| ; 121 (121)           ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |aes|decrypt:a|Round:r|AddRoundKey:op1         ; AddRoundKey   ; work         ;
+;          |InvMix:op4|      ; 339 (339)           ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |aes|decrypt:a|Round:r|InvMix:op4              ; InvMix        ; work         ;
+;          |InvSubBytes:op2| ; 594 (594)           ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |aes|decrypt:a|Round:r|InvSubBytes:op2         ; InvSubBytes   ; work         ;
+;       |SevenSegment:show|  ; 18 (18)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |aes|decrypt:a|SevenSegment:show               ; SevenSegment  ; work         ;
 +----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+------------------------------------------------+---------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
-+------------------------------------------------------------------------------------------+
-; Registers Removed During Synthesis                                                       ;
-+----------------------------------------+-------------------------------------------------+
-; Register name                          ; Reason for Removal                              ;
-+----------------------------------------+-------------------------------------------------+
-; Encrypt:e|count[31]                    ; Merged with Encrypt:e|Round_Encrypt:r|count[31] ;
-; decrypt:a|Round:r|count[31]            ; Merged with Encrypt:e|Round_Encrypt:r|count[31] ;
-; decrypt:a|count[31]                    ; Merged with Encrypt:e|Round_Encrypt:r|count[31] ;
-; Encrypt:e|count[30]                    ; Merged with Encrypt:e|Round_Encrypt:r|count[30] ;
-; decrypt:a|Round:r|count[30]            ; Merged with Encrypt:e|Round_Encrypt:r|count[30] ;
-; decrypt:a|count[30]                    ; Merged with Encrypt:e|Round_Encrypt:r|count[30] ;
-; Encrypt:e|count[29]                    ; Merged with Encrypt:e|Round_Encrypt:r|count[29] ;
-; decrypt:a|Round:r|count[29]            ; Merged with Encrypt:e|Round_Encrypt:r|count[29] ;
-; decrypt:a|count[29]                    ; Merged with Encrypt:e|Round_Encrypt:r|count[29] ;
-; Encrypt:e|count[28]                    ; Merged with Encrypt:e|Round_Encrypt:r|count[28] ;
-; decrypt:a|Round:r|count[28]            ; Merged with Encrypt:e|Round_Encrypt:r|count[28] ;
-; decrypt:a|count[28]                    ; Merged with Encrypt:e|Round_Encrypt:r|count[28] ;
-; Encrypt:e|count[27]                    ; Merged with Encrypt:e|Round_Encrypt:r|count[27] ;
-; decrypt:a|Round:r|count[27]            ; Merged with Encrypt:e|Round_Encrypt:r|count[27] ;
-; decrypt:a|count[27]                    ; Merged with Encrypt:e|Round_Encrypt:r|count[27] ;
-; Encrypt:e|count[26]                    ; Merged with Encrypt:e|Round_Encrypt:r|count[26] ;
-; decrypt:a|Round:r|count[26]            ; Merged with Encrypt:e|Round_Encrypt:r|count[26] ;
-; decrypt:a|count[26]                    ; Merged with Encrypt:e|Round_Encrypt:r|count[26] ;
-; Encrypt:e|count[25]                    ; Merged with Encrypt:e|Round_Encrypt:r|count[25] ;
-; decrypt:a|Round:r|count[25]            ; Merged with Encrypt:e|Round_Encrypt:r|count[25] ;
-; decrypt:a|count[25]                    ; Merged with Encrypt:e|Round_Encrypt:r|count[25] ;
-; Encrypt:e|count[24]                    ; Merged with Encrypt:e|Round_Encrypt:r|count[24] ;
-; decrypt:a|Round:r|count[24]            ; Merged with Encrypt:e|Round_Encrypt:r|count[24] ;
-; decrypt:a|count[24]                    ; Merged with Encrypt:e|Round_Encrypt:r|count[24] ;
-; Encrypt:e|count[23]                    ; Merged with Encrypt:e|Round_Encrypt:r|count[23] ;
-; decrypt:a|Round:r|count[23]            ; Merged with Encrypt:e|Round_Encrypt:r|count[23] ;
-; decrypt:a|count[23]                    ; Merged with Encrypt:e|Round_Encrypt:r|count[23] ;
-; Encrypt:e|count[22]                    ; Merged with Encrypt:e|Round_Encrypt:r|count[22] ;
-; decrypt:a|Round:r|count[22]            ; Merged with Encrypt:e|Round_Encrypt:r|count[22] ;
-; decrypt:a|count[22]                    ; Merged with Encrypt:e|Round_Encrypt:r|count[22] ;
-; Encrypt:e|count[21]                    ; Merged with Encrypt:e|Round_Encrypt:r|count[21] ;
-; decrypt:a|Round:r|count[21]            ; Merged with Encrypt:e|Round_Encrypt:r|count[21] ;
-; decrypt:a|count[21]                    ; Merged with Encrypt:e|Round_Encrypt:r|count[21] ;
-; Encrypt:e|count[20]                    ; Merged with Encrypt:e|Round_Encrypt:r|count[20] ;
-; decrypt:a|Round:r|count[20]            ; Merged with Encrypt:e|Round_Encrypt:r|count[20] ;
-; decrypt:a|count[20]                    ; Merged with Encrypt:e|Round_Encrypt:r|count[20] ;
-; Encrypt:e|count[19]                    ; Merged with Encrypt:e|Round_Encrypt:r|count[19] ;
-; decrypt:a|Round:r|count[19]            ; Merged with Encrypt:e|Round_Encrypt:r|count[19] ;
-; decrypt:a|count[19]                    ; Merged with Encrypt:e|Round_Encrypt:r|count[19] ;
-; Encrypt:e|count[18]                    ; Merged with Encrypt:e|Round_Encrypt:r|count[18] ;
-; decrypt:a|Round:r|count[18]            ; Merged with Encrypt:e|Round_Encrypt:r|count[18] ;
-; decrypt:a|count[18]                    ; Merged with Encrypt:e|Round_Encrypt:r|count[18] ;
-; Encrypt:e|count[17]                    ; Merged with Encrypt:e|Round_Encrypt:r|count[17] ;
-; decrypt:a|Round:r|count[17]            ; Merged with Encrypt:e|Round_Encrypt:r|count[17] ;
-; decrypt:a|count[17]                    ; Merged with Encrypt:e|Round_Encrypt:r|count[17] ;
-; Encrypt:e|count[16]                    ; Merged with Encrypt:e|Round_Encrypt:r|count[16] ;
-; decrypt:a|Round:r|count[16]            ; Merged with Encrypt:e|Round_Encrypt:r|count[16] ;
-; decrypt:a|count[16]                    ; Merged with Encrypt:e|Round_Encrypt:r|count[16] ;
-; Encrypt:e|count[15]                    ; Merged with Encrypt:e|Round_Encrypt:r|count[15] ;
-; decrypt:a|Round:r|count[15]            ; Merged with Encrypt:e|Round_Encrypt:r|count[15] ;
-; decrypt:a|count[15]                    ; Merged with Encrypt:e|Round_Encrypt:r|count[15] ;
-; Encrypt:e|count[14]                    ; Merged with Encrypt:e|Round_Encrypt:r|count[14] ;
-; decrypt:a|Round:r|count[14]            ; Merged with Encrypt:e|Round_Encrypt:r|count[14] ;
-; decrypt:a|count[14]                    ; Merged with Encrypt:e|Round_Encrypt:r|count[14] ;
-; Encrypt:e|count[13]                    ; Merged with Encrypt:e|Round_Encrypt:r|count[13] ;
-; decrypt:a|Round:r|count[13]            ; Merged with Encrypt:e|Round_Encrypt:r|count[13] ;
-; decrypt:a|count[13]                    ; Merged with Encrypt:e|Round_Encrypt:r|count[13] ;
-; Encrypt:e|count[12]                    ; Merged with Encrypt:e|Round_Encrypt:r|count[12] ;
-; decrypt:a|Round:r|count[12]            ; Merged with Encrypt:e|Round_Encrypt:r|count[12] ;
-; decrypt:a|count[12]                    ; Merged with Encrypt:e|Round_Encrypt:r|count[12] ;
-; Encrypt:e|count[11]                    ; Merged with Encrypt:e|Round_Encrypt:r|count[11] ;
-; decrypt:a|Round:r|count[11]            ; Merged with Encrypt:e|Round_Encrypt:r|count[11] ;
-; decrypt:a|count[11]                    ; Merged with Encrypt:e|Round_Encrypt:r|count[11] ;
-; Encrypt:e|count[10]                    ; Merged with Encrypt:e|Round_Encrypt:r|count[10] ;
-; decrypt:a|Round:r|count[10]            ; Merged with Encrypt:e|Round_Encrypt:r|count[10] ;
-; decrypt:a|count[10]                    ; Merged with Encrypt:e|Round_Encrypt:r|count[10] ;
-; Encrypt:e|count[9]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[9]  ;
-; decrypt:a|Round:r|count[9]             ; Merged with Encrypt:e|Round_Encrypt:r|count[9]  ;
-; decrypt:a|count[9]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[9]  ;
-; Encrypt:e|count[8]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[8]  ;
-; decrypt:a|Round:r|count[8]             ; Merged with Encrypt:e|Round_Encrypt:r|count[8]  ;
-; decrypt:a|count[8]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[8]  ;
-; Encrypt:e|count[7]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[7]  ;
-; decrypt:a|Round:r|count[7]             ; Merged with Encrypt:e|Round_Encrypt:r|count[7]  ;
-; decrypt:a|count[7]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[7]  ;
-; Encrypt:e|count[6]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[6]  ;
-; decrypt:a|Round:r|count[6]             ; Merged with Encrypt:e|Round_Encrypt:r|count[6]  ;
-; decrypt:a|count[6]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[6]  ;
-; Encrypt:e|count[5]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[5]  ;
-; decrypt:a|Round:r|count[5]             ; Merged with Encrypt:e|Round_Encrypt:r|count[5]  ;
-; decrypt:a|count[5]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[5]  ;
-; Encrypt:e|count[4]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[4]  ;
-; decrypt:a|Round:r|count[4]             ; Merged with Encrypt:e|Round_Encrypt:r|count[4]  ;
-; decrypt:a|count[4]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[4]  ;
-; Encrypt:e|count[0]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[0]  ;
-; decrypt:a|Round:r|count[0]             ; Merged with Encrypt:e|Round_Encrypt:r|count[0]  ;
-; decrypt:a|count[0]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[0]  ;
-; Encrypt:e|count[3]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[3]  ;
-; decrypt:a|Round:r|count[3]             ; Merged with Encrypt:e|Round_Encrypt:r|count[3]  ;
-; decrypt:a|count[3]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[3]  ;
-; Encrypt:e|count[2]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[2]  ;
-; decrypt:a|Round:r|count[2]             ; Merged with Encrypt:e|Round_Encrypt:r|count[2]  ;
-; decrypt:a|count[2]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[2]  ;
-; Encrypt:e|count[1]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[1]  ;
-; decrypt:a|Round:r|count[1]             ; Merged with Encrypt:e|Round_Encrypt:r|count[1]  ;
-; decrypt:a|count[1]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[1]  ;
-; decrypt:a|temp_key[21]                 ; Merged with decrypt:a|temp_key[110]             ;
-; Encrypt:e|temp_key[21]                 ; Merged with Encrypt:e|temp_key[110]             ;
-; Total Number of Removed Registers = 98 ;                                                 ;
-+----------------------------------------+-------------------------------------------------+
++--------------------------------------------------------------+
+; Logic Cells Representing Combinational Loops                 ;
++--------------------------------------------------------+-----+
+; Logic Cell Name                                        ;     ;
++--------------------------------------------------------+-----+
+; Encrypt:e|tempo[1]~0                                   ;     ;
+; Encrypt:e|tempo[2]~1                                   ;     ;
+; Encrypt:e|tempo[3]~2                                   ;     ;
+; Encrypt:e|tempo[4]~3                                   ;     ;
+; Encrypt:e|tempo[5]~6                                   ;     ;
+; Encrypt:e|tempo[7]~4                                   ;     ;
+; Encrypt:e|tempo[6]~5                                   ;     ;
+; Encrypt:e|tempo[0]~7                                   ;     ;
+; decrypt:a|tempo[2]~1                                   ;     ;
+; decrypt:a|tempo[3]~2                                   ;     ;
+; decrypt:a|tempo[4]~3                                   ;     ;
+; decrypt:a|tempo[5]~6                                   ;     ;
+; decrypt:a|tempo[7]~4                                   ;     ;
+; decrypt:a|tempo[6]~5                                   ;     ;
+; decrypt:a|tempo[1]~0                                   ;     ;
+; decrypt:a|tempo[0]~7                                   ;     ;
+; decrypt:a|out[8]                                       ;     ;
+; decrypt:a|out[9]                                       ;     ;
+; decrypt:a|out[10]                                      ;     ;
+; decrypt:a|out[11]                                      ;     ;
+; decrypt:a|out[12]                                      ;     ;
+; decrypt:a|out[13]                                      ;     ;
+; decrypt:a|out[14]                                      ;     ;
+; decrypt:a|out[15]                                      ;     ;
+; decrypt:a|out[16]                                      ;     ;
+; decrypt:a|out[17]                                      ;     ;
+; decrypt:a|out[18]                                      ;     ;
+; decrypt:a|out[19]                                      ;     ;
+; decrypt:a|out[20]                                      ;     ;
+; decrypt:a|out[21]                                      ;     ;
+; decrypt:a|out[22]                                      ;     ;
+; decrypt:a|out[23]                                      ;     ;
+; decrypt:a|out[24]                                      ;     ;
+; decrypt:a|out[25]                                      ;     ;
+; decrypt:a|out[26]                                      ;     ;
+; decrypt:a|out[27]                                      ;     ;
+; decrypt:a|out[28]                                      ;     ;
+; decrypt:a|out[29]                                      ;     ;
+; decrypt:a|out[30]                                      ;     ;
+; decrypt:a|out[31]                                      ;     ;
+; decrypt:a|out[32]                                      ;     ;
+; decrypt:a|out[33]                                      ;     ;
+; decrypt:a|out[34]                                      ;     ;
+; decrypt:a|out[35]                                      ;     ;
+; decrypt:a|out[36]                                      ;     ;
+; decrypt:a|out[37]                                      ;     ;
+; decrypt:a|out[38]                                      ;     ;
+; decrypt:a|out[39]                                      ;     ;
+; decrypt:a|out[40]                                      ;     ;
+; decrypt:a|out[41]                                      ;     ;
+; decrypt:a|out[42]                                      ;     ;
+; decrypt:a|out[43]                                      ;     ;
+; decrypt:a|out[44]                                      ;     ;
+; decrypt:a|out[45]                                      ;     ;
+; decrypt:a|out[46]                                      ;     ;
+; decrypt:a|out[47]                                      ;     ;
+; decrypt:a|out[48]                                      ;     ;
+; decrypt:a|out[49]                                      ;     ;
+; decrypt:a|out[50]                                      ;     ;
+; decrypt:a|out[51]                                      ;     ;
+; decrypt:a|out[52]                                      ;     ;
+; decrypt:a|out[53]                                      ;     ;
+; decrypt:a|out[54]                                      ;     ;
+; decrypt:a|out[55]                                      ;     ;
+; decrypt:a|out[56]                                      ;     ;
+; decrypt:a|out[57]                                      ;     ;
+; decrypt:a|out[58]                                      ;     ;
+; decrypt:a|out[59]                                      ;     ;
+; decrypt:a|out[60]                                      ;     ;
+; decrypt:a|out[61]                                      ;     ;
+; decrypt:a|out[62]                                      ;     ;
+; decrypt:a|out[63]                                      ;     ;
+; decrypt:a|out[64]                                      ;     ;
+; decrypt:a|out[65]                                      ;     ;
+; decrypt:a|out[66]                                      ;     ;
+; decrypt:a|out[67]                                      ;     ;
+; decrypt:a|out[68]                                      ;     ;
+; decrypt:a|out[69]                                      ;     ;
+; decrypt:a|out[70]                                      ;     ;
+; decrypt:a|out[71]                                      ;     ;
+; decrypt:a|out[72]                                      ;     ;
+; decrypt:a|out[73]                                      ;     ;
+; decrypt:a|out[74]                                      ;     ;
+; decrypt:a|out[75]                                      ;     ;
+; decrypt:a|out[76]                                      ;     ;
+; decrypt:a|out[77]                                      ;     ;
+; decrypt:a|out[78]                                      ;     ;
+; decrypt:a|out[79]                                      ;     ;
+; decrypt:a|out[80]                                      ;     ;
+; decrypt:a|out[81]                                      ;     ;
+; decrypt:a|out[82]                                      ;     ;
+; decrypt:a|out[83]                                      ;     ;
+; decrypt:a|out[84]                                      ;     ;
+; decrypt:a|out[85]                                      ;     ;
+; decrypt:a|out[86]                                      ;     ;
+; decrypt:a|out[87]                                      ;     ;
+; decrypt:a|out[88]                                      ;     ;
+; decrypt:a|out[89]                                      ;     ;
+; decrypt:a|out[90]                                      ;     ;
+; decrypt:a|out[91]                                      ;     ;
+; Number of logic cells representing combinational loops ; 256 ;
++--------------------------------------------------------+-----+
+Table restricted to first 100 entries. Note: All cells listed above may not be present at the end of synthesis due to various synthesis optimizations.
+
+
++-------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                        ;
++-----------------------------------------+-------------------------------------------------+
+; Register name                           ; Reason for Removal                              ;
++-----------------------------------------+-------------------------------------------------+
+; Encrypt:e|count[31]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[31] ;
+; count[31]                               ; Merged with Encrypt:e|Round_Encrypt:r|count[31] ;
+; decrypt:a|Round:r|count[31]             ; Merged with Encrypt:e|Round_Encrypt:r|count[31] ;
+; decrypt:a|count[31]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[31] ;
+; Encrypt:e|count[30]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[30] ;
+; count[30]                               ; Merged with Encrypt:e|Round_Encrypt:r|count[30] ;
+; decrypt:a|Round:r|count[30]             ; Merged with Encrypt:e|Round_Encrypt:r|count[30] ;
+; decrypt:a|count[30]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[30] ;
+; Encrypt:e|count[29]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[29] ;
+; count[29]                               ; Merged with Encrypt:e|Round_Encrypt:r|count[29] ;
+; decrypt:a|Round:r|count[29]             ; Merged with Encrypt:e|Round_Encrypt:r|count[29] ;
+; decrypt:a|count[29]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[29] ;
+; Encrypt:e|count[28]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[28] ;
+; count[28]                               ; Merged with Encrypt:e|Round_Encrypt:r|count[28] ;
+; decrypt:a|Round:r|count[28]             ; Merged with Encrypt:e|Round_Encrypt:r|count[28] ;
+; decrypt:a|count[28]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[28] ;
+; Encrypt:e|count[27]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[27] ;
+; count[27]                               ; Merged with Encrypt:e|Round_Encrypt:r|count[27] ;
+; decrypt:a|Round:r|count[27]             ; Merged with Encrypt:e|Round_Encrypt:r|count[27] ;
+; decrypt:a|count[27]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[27] ;
+; Encrypt:e|count[26]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[26] ;
+; count[26]                               ; Merged with Encrypt:e|Round_Encrypt:r|count[26] ;
+; decrypt:a|Round:r|count[26]             ; Merged with Encrypt:e|Round_Encrypt:r|count[26] ;
+; decrypt:a|count[26]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[26] ;
+; Encrypt:e|count[25]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[25] ;
+; count[25]                               ; Merged with Encrypt:e|Round_Encrypt:r|count[25] ;
+; decrypt:a|Round:r|count[25]             ; Merged with Encrypt:e|Round_Encrypt:r|count[25] ;
+; decrypt:a|count[25]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[25] ;
+; Encrypt:e|count[24]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[24] ;
+; count[24]                               ; Merged with Encrypt:e|Round_Encrypt:r|count[24] ;
+; decrypt:a|Round:r|count[24]             ; Merged with Encrypt:e|Round_Encrypt:r|count[24] ;
+; decrypt:a|count[24]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[24] ;
+; Encrypt:e|count[23]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[23] ;
+; count[23]                               ; Merged with Encrypt:e|Round_Encrypt:r|count[23] ;
+; decrypt:a|Round:r|count[23]             ; Merged with Encrypt:e|Round_Encrypt:r|count[23] ;
+; decrypt:a|count[23]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[23] ;
+; Encrypt:e|count[22]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[22] ;
+; count[22]                               ; Merged with Encrypt:e|Round_Encrypt:r|count[22] ;
+; decrypt:a|Round:r|count[22]             ; Merged with Encrypt:e|Round_Encrypt:r|count[22] ;
+; decrypt:a|count[22]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[22] ;
+; Encrypt:e|count[21]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[21] ;
+; count[21]                               ; Merged with Encrypt:e|Round_Encrypt:r|count[21] ;
+; decrypt:a|Round:r|count[21]             ; Merged with Encrypt:e|Round_Encrypt:r|count[21] ;
+; decrypt:a|count[21]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[21] ;
+; Encrypt:e|count[20]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[20] ;
+; count[20]                               ; Merged with Encrypt:e|Round_Encrypt:r|count[20] ;
+; decrypt:a|Round:r|count[20]             ; Merged with Encrypt:e|Round_Encrypt:r|count[20] ;
+; decrypt:a|count[20]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[20] ;
+; Encrypt:e|count[19]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[19] ;
+; count[19]                               ; Merged with Encrypt:e|Round_Encrypt:r|count[19] ;
+; decrypt:a|Round:r|count[19]             ; Merged with Encrypt:e|Round_Encrypt:r|count[19] ;
+; decrypt:a|count[19]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[19] ;
+; Encrypt:e|count[18]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[18] ;
+; count[18]                               ; Merged with Encrypt:e|Round_Encrypt:r|count[18] ;
+; decrypt:a|Round:r|count[18]             ; Merged with Encrypt:e|Round_Encrypt:r|count[18] ;
+; decrypt:a|count[18]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[18] ;
+; Encrypt:e|count[17]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[17] ;
+; count[17]                               ; Merged with Encrypt:e|Round_Encrypt:r|count[17] ;
+; decrypt:a|Round:r|count[17]             ; Merged with Encrypt:e|Round_Encrypt:r|count[17] ;
+; decrypt:a|count[17]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[17] ;
+; Encrypt:e|count[16]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[16] ;
+; count[16]                               ; Merged with Encrypt:e|Round_Encrypt:r|count[16] ;
+; decrypt:a|Round:r|count[16]             ; Merged with Encrypt:e|Round_Encrypt:r|count[16] ;
+; decrypt:a|count[16]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[16] ;
+; Encrypt:e|count[15]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[15] ;
+; count[15]                               ; Merged with Encrypt:e|Round_Encrypt:r|count[15] ;
+; decrypt:a|Round:r|count[15]             ; Merged with Encrypt:e|Round_Encrypt:r|count[15] ;
+; decrypt:a|count[15]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[15] ;
+; Encrypt:e|count[14]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[14] ;
+; count[14]                               ; Merged with Encrypt:e|Round_Encrypt:r|count[14] ;
+; decrypt:a|Round:r|count[14]             ; Merged with Encrypt:e|Round_Encrypt:r|count[14] ;
+; decrypt:a|count[14]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[14] ;
+; Encrypt:e|count[13]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[13] ;
+; count[13]                               ; Merged with Encrypt:e|Round_Encrypt:r|count[13] ;
+; decrypt:a|Round:r|count[13]             ; Merged with Encrypt:e|Round_Encrypt:r|count[13] ;
+; decrypt:a|count[13]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[13] ;
+; Encrypt:e|count[12]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[12] ;
+; count[12]                               ; Merged with Encrypt:e|Round_Encrypt:r|count[12] ;
+; decrypt:a|Round:r|count[12]             ; Merged with Encrypt:e|Round_Encrypt:r|count[12] ;
+; decrypt:a|count[12]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[12] ;
+; Encrypt:e|count[11]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[11] ;
+; count[11]                               ; Merged with Encrypt:e|Round_Encrypt:r|count[11] ;
+; decrypt:a|Round:r|count[11]             ; Merged with Encrypt:e|Round_Encrypt:r|count[11] ;
+; decrypt:a|count[11]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[11] ;
+; Encrypt:e|count[10]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[10] ;
+; count[10]                               ; Merged with Encrypt:e|Round_Encrypt:r|count[10] ;
+; decrypt:a|Round:r|count[10]             ; Merged with Encrypt:e|Round_Encrypt:r|count[10] ;
+; decrypt:a|count[10]                     ; Merged with Encrypt:e|Round_Encrypt:r|count[10] ;
+; Encrypt:e|count[9]                      ; Merged with Encrypt:e|Round_Encrypt:r|count[9]  ;
+; count[9]                                ; Merged with Encrypt:e|Round_Encrypt:r|count[9]  ;
+; decrypt:a|Round:r|count[9]              ; Merged with Encrypt:e|Round_Encrypt:r|count[9]  ;
+; decrypt:a|count[9]                      ; Merged with Encrypt:e|Round_Encrypt:r|count[9]  ;
+; Encrypt:e|count[8]                      ; Merged with Encrypt:e|Round_Encrypt:r|count[8]  ;
+; count[8]                                ; Merged with Encrypt:e|Round_Encrypt:r|count[8]  ;
+; decrypt:a|Round:r|count[8]              ; Merged with Encrypt:e|Round_Encrypt:r|count[8]  ;
+; decrypt:a|count[8]                      ; Merged with Encrypt:e|Round_Encrypt:r|count[8]  ;
+; Encrypt:e|count[7]                      ; Merged with Encrypt:e|Round_Encrypt:r|count[7]  ;
+; count[7]                                ; Merged with Encrypt:e|Round_Encrypt:r|count[7]  ;
+; decrypt:a|Round:r|count[7]              ; Merged with Encrypt:e|Round_Encrypt:r|count[7]  ;
+; decrypt:a|count[7]                      ; Merged with Encrypt:e|Round_Encrypt:r|count[7]  ;
+; Encrypt:e|count[6]                      ; Merged with Encrypt:e|Round_Encrypt:r|count[6]  ;
+; count[6]                                ; Merged with Encrypt:e|Round_Encrypt:r|count[6]  ;
+; decrypt:a|Round:r|count[6]              ; Merged with Encrypt:e|Round_Encrypt:r|count[6]  ;
+; decrypt:a|count[6]                      ; Merged with Encrypt:e|Round_Encrypt:r|count[6]  ;
+; Encrypt:e|count[5]                      ; Merged with Encrypt:e|Round_Encrypt:r|count[5]  ;
+; count[5]                                ; Merged with Encrypt:e|Round_Encrypt:r|count[5]  ;
+; decrypt:a|Round:r|count[5]              ; Merged with Encrypt:e|Round_Encrypt:r|count[5]  ;
+; decrypt:a|count[5]                      ; Merged with Encrypt:e|Round_Encrypt:r|count[5]  ;
+; Encrypt:e|count[4]                      ; Merged with Encrypt:e|Round_Encrypt:r|count[4]  ;
+; count[4]                                ; Merged with Encrypt:e|Round_Encrypt:r|count[4]  ;
+; decrypt:a|Round:r|count[4]              ; Merged with Encrypt:e|Round_Encrypt:r|count[4]  ;
+; decrypt:a|count[4]                      ; Merged with Encrypt:e|Round_Encrypt:r|count[4]  ;
+; Encrypt:e|count[3]                      ; Merged with Encrypt:e|Round_Encrypt:r|count[3]  ;
+; count[3]                                ; Merged with Encrypt:e|Round_Encrypt:r|count[3]  ;
+; decrypt:a|Round:r|count[3]              ; Merged with Encrypt:e|Round_Encrypt:r|count[3]  ;
+; decrypt:a|count[3]                      ; Merged with Encrypt:e|Round_Encrypt:r|count[3]  ;
+; Encrypt:e|count[2]                      ; Merged with Encrypt:e|Round_Encrypt:r|count[2]  ;
+; count[2]                                ; Merged with Encrypt:e|Round_Encrypt:r|count[2]  ;
+; decrypt:a|Round:r|count[2]              ; Merged with Encrypt:e|Round_Encrypt:r|count[2]  ;
+; decrypt:a|count[2]                      ; Merged with Encrypt:e|Round_Encrypt:r|count[2]  ;
+; Encrypt:e|count[1]                      ; Merged with Encrypt:e|Round_Encrypt:r|count[1]  ;
+; count[1]                                ; Merged with Encrypt:e|Round_Encrypt:r|count[1]  ;
+; decrypt:a|Round:r|count[1]              ; Merged with Encrypt:e|Round_Encrypt:r|count[1]  ;
+; decrypt:a|count[1]                      ; Merged with Encrypt:e|Round_Encrypt:r|count[1]  ;
+; Encrypt:e|count[0]                      ; Merged with Encrypt:e|Round_Encrypt:r|count[0]  ;
+; count[0]                                ; Merged with Encrypt:e|Round_Encrypt:r|count[0]  ;
+; decrypt:a|Round:r|count[0]              ; Merged with Encrypt:e|Round_Encrypt:r|count[0]  ;
+; decrypt:a|count[0]                      ; Merged with Encrypt:e|Round_Encrypt:r|count[0]  ;
+; decrypt:a|temp_key[21]                  ; Merged with decrypt:a|temp_key[110]             ;
+; Encrypt:e|temp_key[21]                  ; Merged with Encrypt:e|temp_key[110]             ;
+; Total Number of Removed Registers = 130 ;                                                 ;
++-----------------------------------------+-------------------------------------------------+
 
 
 +------------------------------------------------------+
@@ -356,8 +499,8 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
 ; Total registers                              ; 542   ;
-; Number of registers using Synchronous Clear  ; 238   ;
-; Number of registers using Synchronous Load   ; 255   ;
+; Number of registers using Synchronous Clear  ; 183   ;
+; Number of registers using Synchronous Load   ; 310   ;
 ; Number of registers using Asynchronous Clear ; 0     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
 ; Number of registers using Clock Enable       ; 510   ;
@@ -365,24 +508,24 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 
 
-+-----------------------------------------------------------------------------------------------------------------------------------------------------+
-; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                      ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------+
-; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output            ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------+
-; 3:1                ; 10 bits   ; 20 LEs        ; 10 LEs               ; 10 LEs                 ; Yes        ; |aes|Encrypt:e|temp_in[33]            ;
-; 3:1                ; 112 bits  ; 224 LEs       ; 0 LEs                ; 224 LEs                ; Yes        ; |aes|Encrypt:e|temp_in[38]            ;
-; 3:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |aes|Encrypt:e|temp_in[83]            ;
-; 3:1                ; 72 bits   ; 144 LEs       ; 72 LEs               ; 72 LEs                 ; Yes        ; |aes|decrypt:a|temp_key[31]           ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 0 LEs                ; 16 LEs                 ; Yes        ; |aes|decrypt:a|temp_in[7]             ;
-; 3:1                ; 56 bits   ; 112 LEs       ; 0 LEs                ; 112 LEs                ; Yes        ; |aes|decrypt:a|temp_key[83]           ;
-; 4:1                ; 120 bits  ; 240 LEs       ; 240 LEs              ; 0 LEs                  ; Yes        ; |aes|decrypt:a|temp_in[73]            ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |aes|Encrypt:e|SevenSegment:show|H[4] ;
-; 5:1                ; 2 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; No         ; |aes|Encrypt:e|SevenSegment:show|O[5] ;
-; 5:1                ; 2 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; No         ; |aes|Encrypt:e|SevenSegment:show|T[6] ;
-; 6:1                ; 3 bits    ; 12 LEs        ; 12 LEs               ; 0 LEs                  ; No         ; |aes|Encrypt:e|SevenSegment:show|O[3] ;
-; 6:1                ; 3 bits    ; 12 LEs        ; 12 LEs               ; 0 LEs                  ; No         ; |aes|Encrypt:e|SevenSegment:show|T[3] ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------+
++-------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                            ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output  ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------+
+; 3:1                ; 72 bits   ; 144 LEs       ; 72 LEs               ; 72 LEs                 ; Yes        ; |aes|decrypt:a|temp_key[39] ;
+; 3:1                ; 128 bits  ; 256 LEs       ; 0 LEs                ; 256 LEs                ; Yes        ; |aes|decrypt:a|temp_in[81]  ;
+; 3:1                ; 56 bits   ; 112 LEs       ; 0 LEs                ; 112 LEs                ; Yes        ; |aes|decrypt:a|temp_key[82] ;
+; 3:1                ; 10 bits   ; 20 LEs        ; 10 LEs               ; 10 LEs                 ; Yes        ; |aes|Encrypt:e|temp_in[13]  ;
+; 3:1                ; 112 bits  ; 224 LEs       ; 0 LEs                ; 224 LEs                ; Yes        ; |aes|Encrypt:e|temp_in[16]  ;
+; 3:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |aes|Encrypt:e|temp_in[92]  ;
+; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |aes|HEX3                   ;
+; 6:1                ; 2 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; No         ; |aes|HEX3                   ;
+; 10:1               ; 2 bits    ; 12 LEs        ; 12 LEs               ; 0 LEs                  ; No         ; |aes|HEX1                   ;
+; 10:1               ; 2 bits    ; 12 LEs        ; 12 LEs               ; 0 LEs                  ; No         ; |aes|HEX2                   ;
+; 12:1               ; 3 bits    ; 24 LEs        ; 24 LEs               ; 0 LEs                  ; No         ; |aes|HEX1                   ;
+; 12:1               ; 3 bits    ; 24 LEs        ; 24 LEs               ; 0 LEs                  ; No         ; |aes|HEX2                   ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------+
 
 
 +----------------------------------------------------------------+
@@ -394,17 +537,6 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; nr             ; 14    ; Signed Integer                        ;
 +----------------+-------+---------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+----------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "decrypt:a"                                                                          ;
-+------+--------+----------+-------------------------------------------------------------------------------------+
-; Port ; Type   ; Severity ; Details                                                                             ;
-+------+--------+----------+-------------------------------------------------------------------------------------+
-; h1   ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; h2   ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; h3   ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-+------+--------+----------+-------------------------------------------------------------------------------------+
 
 
 +------------------------------------------------+
@@ -590,28 +722,28 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-----------------------+-----------------------------+
 ; arriav_ff             ; 542                         ;
 ;     ENA               ; 17                          ;
-;     ENA SCLR          ; 238                         ;
-;     ENA SLD           ; 255                         ;
+;     ENA SCLR          ; 183                         ;
+;     ENA SLD           ; 310                         ;
 ;     plain             ; 32                          ;
-; arriav_lcell_comb     ; 2763                        ;
+; arriav_lcell_comb     ; 2859                        ;
 ;     arith             ; 35                          ;
 ;         1 data inputs ; 32                          ;
 ;         2 data inputs ; 1                           ;
 ;         3 data inputs ; 2                           ;
-;     extend            ; 10                          ;
-;         7 data inputs ; 10                          ;
-;     normal            ; 2718                        ;
+;     extend            ; 47                          ;
+;         7 data inputs ; 47                          ;
+;     normal            ; 2777                        ;
 ;         0 data inputs ; 1                           ;
-;         1 data inputs ; 6                           ;
-;         2 data inputs ; 266                         ;
-;         3 data inputs ; 153                         ;
-;         4 data inputs ; 335                         ;
-;         5 data inputs ; 291                         ;
-;         6 data inputs ; 1666                        ;
+;         1 data inputs ; 5                           ;
+;         2 data inputs ; 171                         ;
+;         3 data inputs ; 156                         ;
+;         4 data inputs ; 338                         ;
+;         5 data inputs ; 408                         ;
+;         6 data inputs ; 1698                        ;
 ; boundary_port         ; 25                          ;
 ;                       ;                             ;
-; Max LUT depth         ; 10.00                       ;
-; Average LUT depth     ; 6.35                        ;
+; Max LUT depth         ; 7.00                        ;
+; Average LUT depth     ; 4.39                        ;
 +-----------------------+-----------------------------+
 
 
@@ -620,7 +752,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:01:22     ;
+; Top            ; 00:00:39     ;
 +----------------+--------------+
 
 
@@ -630,7 +762,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
-    Info: Processing started: Sat May  4 02:11:38 2024
+    Info: Processing started: Sat May  4 05:16:02 2024
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Try -c Try
 Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
 Info (12021): Found 1 design units, including 1 entities, in source file aes.v
@@ -675,9 +807,6 @@ Info (12128): Elaborating entity "Round" for hierarchy "decrypt:a|Round:r" File:
 Info (12128): Elaborating entity "ShiftRows_inv" for hierarchy "decrypt:a|Round:r|ShiftRows_inv:op3" File: D:/Computer department/sem 2/Sim/Round_Decrypt.v Line: 16
 Info (12128): Elaborating entity "InvSubBytes" for hierarchy "decrypt:a|Round:r|InvSubBytes:op2" File: D:/Computer department/sem 2/Sim/Round_Decrypt.v Line: 17
 Info (12128): Elaborating entity "InvMix" for hierarchy "decrypt:a|Round:r|InvMix:op4" File: D:/Computer department/sem 2/Sim/Round_Decrypt.v Line: 19
-Warning (10776): Verilog HDL warning at InvMix.v(20): variable product in static task or function product may have unintended latch behavior File: D:/Computer department/sem 2/Sim/InvMix.v Line: 20
-Warning (10241): Verilog HDL Function Declaration warning at InvMix.v(20): function "product" may return a Don't Care value because its output register may not be assigned a value in every possible path through the function File: D:/Computer department/sem 2/Sim/InvMix.v Line: 20
-Warning (10030): Net "product" at InvMix.v(20) has no driver or initial value, using a default initial value '0' File: D:/Computer department/sem 2/Sim/InvMix.v Line: 20
 Info (276014): Found 52 instances of uninferred RAM logic
     Info (276007): RAM logic "KeyExpansion:expo|Ram0" is uninferred due to asynchronous read logic File: D:/Computer department/sem 2/Sim/KeyExpansion.v Line: 81
     Info (276007): RAM logic "KeyExpansion:expo|Ram1" is uninferred due to asynchronous read logic File: D:/Computer department/sem 2/Sim/KeyExpansion.v Line: 81
@@ -737,15 +866,15 @@ Info (286030): Timing-Driven Synthesis is running
 Info (144001): Generated suppressed messages file D:/Computer department/sem 2/Sim/output_files/Try.map.smsg
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 2901 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 3123 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 3 input pins
     Info (21059): Implemented 22 output pins
-    Info (21061): Implemented 2876 logic cells
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 6 warnings
-    Info: Peak virtual memory: 4986 megabytes
-    Info: Processing ended: Sat May  4 02:13:35 2024
-    Info: Elapsed time: 00:01:57
-    Info: Total CPU time (on all processors): 00:01:16
+    Info (21061): Implemented 3098 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 3 warnings
+    Info: Peak virtual memory: 4934 megabytes
+    Info: Processing ended: Sat May  4 05:16:59 2024
+    Info: Elapsed time: 00:00:57
+    Info: Total CPU time (on all processors): 00:00:32
 
 
 +------------------------------------------+
